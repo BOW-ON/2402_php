@@ -1,0 +1,10 @@
+.ul-none {
+    line-height: 2rem;
+    list-style-type: none;
+}
+
+span {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: red;
+}

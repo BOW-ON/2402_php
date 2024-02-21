@@ -1,0 +1,40 @@
+.header {
+    background-color: black;
+    padding: 10px;
+}
+p {
+    margin: 0px;
+}
+h1 {
+    color: white;
+    margin-top: 0px;
+}
+.main {
+    margin-top: 10px;
+    border: 1px solid gray;
+}
+.color-orange{
+    color : orange;
+}
+.main-p-chk {
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+h2 {
+    color: red;
+    text-align: center;
+}
+.color-blue {
+    color: blue;
+}
+.text-center {
+    text-align: center;
+}
+.font-weight-900 {
+    font-weight: 900;
+}
+
+.line-height {
+    line-height: 2rem;
+}

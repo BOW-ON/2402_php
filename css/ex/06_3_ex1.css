@@ -1,10 +1,10 @@
 /* 전체 선택자 */
-*{
+* {
     color: aqua;
 }
 
 /* 타입 선택자 */
-h1{
+h1 {
     color: red;
 }
 p {
@@ -12,7 +12,7 @@ p {
 }
 
 /* 클래스 선택자 */
-.color-orange{
+.color-orange {
     color: orange;
 }
 .font-size-3rem {
