@@ -1,0 +1,29 @@
+.div-main {
+    border: 1px solid black;
+    width: 95vw;
+    height: 95vh;
+}
+.div-po1 {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: 10vw;
+    left: 10vh ;
+}
+.div-po2 {
+    border: 1px solid black;
+    width: 30vw;
+    height: 25vh;
+    position: sticky;
+    top: 100px;
+    left: 400px;
+}
+.div-po3 {
+    border: 1px solid black;
+    width: 25vw;
+    height: 20vh;
+    position: fixed;
+    top: 60%;
+    left: 15%;
+}
