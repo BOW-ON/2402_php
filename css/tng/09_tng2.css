@@ -1,0 +1,37 @@
+body{
+    background-color: black;
+}
+div {
+    background-color: white;
+    padding: 10px 30px 5px;
+}
+h1 {
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.p-red {
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+li {
+    list-style: none;
+}
+
+.main {
+    position: relative;
+}
+
+img {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
