@@ -1,0 +1,26 @@
+ul {
+    list-style-type: none;
+    box-shadow: 0 5px 5px 5px rgb(77, 76, 76);
+    padding: 0;
+    width: 663px;
+    font-weight: 600;
+}
+li {
+    display: inline-block;
+    background-color: #d1cdcd;
+    width: 50px;
+    text-align: center;
+    line-height: 40px;
+    padding: 0 30px;
+    margin-right: -5.6px;
+}
+.box, .hover1{
+    border-right: 1px solid green;
+}
+.hover1:hover, .box:hover {
+    background-color: gray;
+}
+.hover2:hover {
+    background-color: red;
+    color : white
+}

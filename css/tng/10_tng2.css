@@ -1,0 +1,41 @@
+form {
+    background-image: url('../img/docker.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+legend {
+    font-size: 30px ;
+    font-weight: bold;
+    color: rgb(233, 42, 233);
+}
+.require::before {
+    content: '*';
+    color: red;
+}
+input, textarea {
+    background-color: transparent;
+}
+input:focus, textarea:focus {
+    border: 3px solid red;
+    outline: none;
+}
+input:checked + label {
+    color: red;
+}
+textarea{
+    vertical-align: top;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ul > li > span {
+    display: none;
+}
+ul > li:hover > span {
+    display: inline;
+    background-color: black;
+    color: white;
+}

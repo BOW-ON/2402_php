@@ -66,7 +66,7 @@
     word-spacing: 1.5rem;
 }
 
-/* 텍스 그림자 설정
+/* 텍스트 그림자 설정
 (가로위치 세로위치 그림자크기 색상)*/
 .shadow {
     text-shadow: 5px -10px 4px red;

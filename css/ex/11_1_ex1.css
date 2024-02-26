@@ -1,0 +1,25 @@
+div {
+    background-image: url('../img/meerkat.jpg');
+    width: 500px;
+    height: 500px;
+    animation: test 100s;
+}
+div:hover{
+    animation: test2 10s forwards;
+}
+@keyframes test {
+    from {
+        transform: translate(0);
+    }  
+    to {
+        transform: translate(100vw);
+    }  
+}
+@keyframes test2 {
+    from {
+        transform: scale(0);
+    }  
+    to {
+        transform: scale(2);
+    }  
+}

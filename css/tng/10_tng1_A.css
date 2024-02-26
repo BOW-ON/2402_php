@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    padding: 2rem;
+}
+a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+.nav > ul {
+    list-style-type: none;
+    width: 600px;
+    height: 50px;
+    font-size: 0px;
+    box-shadow: 0px 5px 5px 5px #4d4d4d;
+}
+.nav > ul > li {
+    display: inline-block;
+    background-color: gainsboro;
+    width: 100px;
+    height: 100%;
+    font-size: 14px;
+    text-align: center;
+    line-height: 50px;
+    border-right: 2px solid rgb(189, 245, 105);
+}
+/*  마지막 요소 제외하고 오른쪽 외곽선 지정
+    .nav > ul > li:not(:nth-last-child(1)) {
+    border-right: 2px solid rgb(189, 245, 105);
+} */
+.nav > ul > li:nth-last-child(1) {
+    border: none;
+}
+/* 1~5번 요소 마우스 오릴 시 배경색 지정 */
+.nav > ul > li:not(:last-child):hover {
+    background-color: #4d4d4d;
+}
+/* 마지막 요소 마우스 올릴 시 배경색 지정 */
+.nav > ul > li:last-child > a:hover {
+    background-color: red;
+    color: white;
+}
