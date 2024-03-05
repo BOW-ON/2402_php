@@ -127,3 +127,68 @@ SELECT DISTINCT emp_no
 FROM salaries
 WHERE emp_no = 10001;
 
+-- 10. GROUP BY절, HAVING 절: 그룹으로 묶어서 조회
+-- GROUP BY [그룹으로 묶을 컬럼] HAVING [집계함수 조건]
+-- *그룹으로 묶을 컬럼만 select해야됨(표준 문법)
+-- 성별간 인원수
+SELECT
+	gender
+	,COUNT(gender)
+FROM employees
+GROUP BY gender
+;
+-- 현재 재직중인 직원의 직책별 사원수 조회
+SELECT
+	title
+	,COUNT(title)
+FROM titles
+WHERE to_date >= '2024/03/05'
+GROUP BY title HAVING title LIKE('%Engineer%')
+;
+-- ex1) 각 사원의 최고연봉 중 80000 이상을 조회
+SELECT
+	emp_no
+	,MAX(salary)
+FROM salaries
+GROUP BY emp_no HAVING MAX(salary) >= 80000
+;
+
+-- 11. AS 키워드 : 컬럼에 별칭을 부여
+SELECT
+	emp_no
+	,MAX(salary) AS max_sal
+FROM salaries sal
+GROUP BY emp_no HAVING MAX(salary) >= 80000
+;
+
+-- 12. LIMIT, OFFSET : 출력하는 데이터의 개수 제한
+SELECT *
+FROM employees
+LIMIT 5 OFFSET 10;
+-- OFFSET 생략 : LIMIT 10, 5;
+-- 가장 높은 연봉을 받는 사원 번호 조회
+SELECT
+	emp_no
+	,MAX(salary) AS max_sal
+FROM salaries
+GROUP BY emp_no
+ORDER BY max_sal DESC
+LIMIT 1
+;
+-- ex1) 재직중인 사원 중 급여 상위 5위까지 조회
+SELECT
+	emp_no
+	,MAX(salary) AS max_sal 
+FROM salaries
+WHERE to_date >='20240305'
+GROUP BY emp_no
+ORDER BY max_sal DESC
+LIMIT 5
+;
+-- 정답 (그룹을 지을 필요가 없다)
+SELECT emp_no, salary
+FROM salaries
+WHERE to_date >= '20240305'
+ORDER BY salary DESC
+LIMIT 5;
+
