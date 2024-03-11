@@ -109,18 +109,27 @@ FROM (
 		emp.emp_no
 		,emp.first_name
 		,RANK() OVER(ORDER BY sal.salary DESC) sal_rank_max
-		,RANK() OVER(ORDER BY sal.salary ASC) sal_ramk_min
+		,RANK() OVER(ORDER BY sal.salary ASC) sal_rank_min
 	FROM employees emp
 		JOIN salaries sal
 			ON emp.emp_no = sal.emp_no
 			AND sal.to_date >= NOW()
 	) rank_tbl
-WHERE rank_tbl.sal_rank = 1 OR rank_tbl.sal_rank = 10
+WHERE rank_tbl.sal_rank_max = 1
+	OR rank_tbl.sal_rank_min = 1
 ;
 
 -- 9. 전체 사원의 평균 연봉을 출력해 주세요.
+SELECT AVG(salary) sal_avg
+FROM salaries sal
+WHERE sal.to_date >= NOW()
+;
 
 -- 10. 사번이 499,975인 사원의 지금까지 평균 연봉을 출력해 주세요.
+SELECT AVG(salary) sal_avg
+FROM salaries sal
+WHERE sal.emp_no = 499975
+;
 
 -- 11. 아래 구조의 테이블을 작성하는 SQL을 작성해 주세요.
 CREATE DATABASE users;
@@ -136,19 +145,46 @@ CREATE TABLE users (
 );
 
 -- 12. [01]에서 만든 테이블에 아래 데이터를 입력해 주세요.
-INSERT INTO users (
-	userid
-	,username
-	,authflg
-	,birthday
-	,created_at
-)
-VALUES (
-	'자동증가'
-	,'그린'
-	,'0'
-	,20240126
-	,NOW()
-);
+INSERT INTO users
+	(userid, username, authflg, birthday, created_at)
+VALUES
+	(1, '그린', '0', 20240126, NOW())
+;
 
 -- 13. [02]에서 만든 레코드를 아래 데이터로 갱신해 주세요.
+UPDATE users
+SET
+	username = '테스터'
+	,authflg = '1'
+	,birthday = 20070301
+WHERE userid = 1
+;
+
+-- 14. [02]에서 만든 레코드를 삭제해 주세요.
+DELETE FROM users
+WHERE userid = 1
+;
+
+-- 15. [01]에서 만든 테이블에 아래 Column을 추가해 주세요.
+ALTER TABLE users ADD COLUMN addr VARCHAR(100) NOT NULL; DEFAULT '-';
+
+
+-- 16. [01]에서 만든 테이블을 삭제해 주세요.
+DROP TABLE users;
+
+-- 17. 아래 테이블에서 유저명, 생일, 랭크명을 출력해 주세요.
+
+CREATE TABLE rankmanagement (
+	rankid			INT				PRIMARY KEY AUTO_INCREMENT
+	,userid			INT				NOT NULL
+	,rankname 		VARCHAR(30)		NOT NULL
+);
+
+INSERT INTO rankmanagement
+	(rankid, userid, rankname)
+VALUES
+	(1, 1, 'manager')
+;
+
+ALTER TABLE rankmanagement ADD CONSTRAINT fk_rankmanagement_userid FOREIGN KEY (userid) REFERENCES users(userid);
+
