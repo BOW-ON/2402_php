@@ -119,6 +119,15 @@ WHERE rank_tbl.sal_rank_max = 1
 	OR rank_tbl.sal_rank_min = 1
 ;
 
+SELECT emp.emp_no, emp.first_name
+FROM employees emp
+	JOIN salaries sal
+		ON emp.emp_no = sal.emp_no
+		AND sal.to_date >= DATE(NOW())
+		AND (sal.salary = (SELECT MAX(salary) FROM salaries)
+			OR sal.salary = (SELECT MIN(salary) FROM salaries))
+ORDER BY sal.salary DESC;
+
 -- 9. 전체 사원의 평균 연봉을 출력해 주세요.
 SELECT AVG(salary) sal_avg
 FROM salaries sal
@@ -134,7 +143,7 @@ WHERE sal.emp_no = 499975
 -- 11. 아래 구조의 테이블을 작성하는 SQL을 작성해 주세요.
 CREATE DATABASE users;
 
-USE users;
+USE users;salariessalaries
 
 CREATE TABLE users (
 	userid 			INT				PRIMARY KEY AUTO_INCREMENT
@@ -146,10 +155,11 @@ CREATE TABLE users (
 
 -- 12. [01]에서 만든 테이블에 아래 데이터를 입력해 주세요.
 INSERT INTO users
-	(userid, username, authflg, birthday, created_at)
+	(username, authflg, birthday, created_at)
 VALUES
-	(1, '그린', '0', 20240126, NOW())
+	('그린', '0', 20240126, NOW())
 ;
+
 
 -- 13. [02]에서 만든 레코드를 아래 데이터로 갱신해 주세요.
 UPDATE users
@@ -173,7 +183,6 @@ ALTER TABLE users ADD COLUMN addr VARCHAR(100) NOT NULL; DEFAULT '-';
 DROP TABLE users;
 
 -- 17. 아래 테이블에서 유저명, 생일, 랭크명을 출력해 주세요.
-
 CREATE TABLE rankmanagement (
 	rankid			INT				PRIMARY KEY AUTO_INCREMENT
 	,userid			INT				NOT NULL
