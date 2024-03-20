@@ -65,6 +65,8 @@ echo "\n";
 // 생성자 메소드 : Whale 클래스랑 동일
 // 메소드 : public swim, public breathe
 
+/* Shark.php 파일로 옮겨서 사용 (php\ex\Shark.php)
+    일반적으로 클래스는 파일로 별도로 만들어서 관리함
 class Shark {
     // 프로퍼티
     private $name;
@@ -80,8 +82,10 @@ class Shark {
         echo $this->name." 호흡한다.\n";
     }
 }
+
 // 인스턴스 생성
 $objShark = new Shark("상어");
 // 호출
 $objShark->swim();
 $objShark->breathe();
+*/
