@@ -49,6 +49,7 @@ if ($file) {
     fwrite($file, "글쓰기 테스트\n");
 
     // 3. 파일 닫기
+    // 처리 후 꼭 파일 닫기
     fclose($file);
 }
 else {

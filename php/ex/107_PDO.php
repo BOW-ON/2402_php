@@ -1,5 +1,5 @@
 <?php
-// php/ex/lib_db.php 함수로 만듬
+// 계속 사용할 예정이라 php/ex/lib_db.php에 함수로 만듬
 // DB접속 정보
 $dbHost = "localhost"; // DB Host, 일반적으로 IP 주소 작성
 $dbUser = "root"; // DB 계정명
