@@ -8,4 +8,4 @@ xcopy 원본경로 카피경로 /E /Y
 
 
 
-xcopy D:\workSpace\2402_php\php\Ztest\1 C:\Apache24\Apache24\htdocs /E /Y
+xcopy D:\Workspace\2402_php\php\Ztest\1 C:\Apache24\htdocs /E /Y

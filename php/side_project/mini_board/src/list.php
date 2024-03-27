@@ -71,8 +71,8 @@ try {
             ?>   
                 <div class="item list-item">
                     <div class="item-no"> <?php echo $item["no"] ?> </div>
-                    <div class="item-title"><a href="./detail.php?no=<?php echo $item["no"]?>$page=<?php echo $page_num ?>"><?php echo $item["title"] ?></a></div>
-                    <div class="item-createdat"><?php echo $item["created_at"] ?></div>
+                    <div class="item-title"> <a href="./detail.php?no=<?php echo $item["no"]?>&page=<?php echo $page_num ?>"><?php echo $item["title"] ?></a></div>
+                    <div class="item-createdat"> <?php echo $item["created_at"] ?></div>
                 </div>
             <?php
             }

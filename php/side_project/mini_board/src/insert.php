@@ -64,7 +64,7 @@ if (REQUEST_METHOD === "POST" ) {
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width= , initial-scale=1.0">
@@ -96,7 +96,7 @@ if (REQUEST_METHOD === "POST" ) {
         </div>
         <div class="main-bottom">
           <button type="submit" class="a-button small-button">작성</button>
-          <a href="./index.html" class="a-button small-button">취소</a>
+          <a href="./list.php" class="a-button small-button">취소</a>
         </div>
       </form>
     </main>
