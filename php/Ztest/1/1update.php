@@ -6,8 +6,6 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,8 +16,7 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 </head>
 <body>
     <?php require_once(FILE_HEADER) ?>
-    update
-    <a href="./1list.php">완료</a>
-    <a href="./1list.php">취소</a>
+    수정 PAGE
+    완료
 </body>
 </html>

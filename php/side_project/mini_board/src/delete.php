@@ -37,9 +37,8 @@ try {
 
     // 아이템 셋팅
     $item = $result[0];
-    }
-    else if (REQUEST_METHOD === "POST") {
-        // 파라미터 획득
+    } else if (REQUEST_METHOD === "POST") {
+      // 파라미터 획득
         $no = isset($_POST["no"]) ? $_POST["no"] : "";
         $arr_err_param = [];
         if($no === ""){
@@ -48,26 +47,26 @@ try {
         if(count($arr_err_param) > 0) {
             throw new Exception("Parameter Error : ".implode(",", $arr_err_param));
         }
-        
-    //Transaction 시작
-    $conn->beginTransaction();
 
-    // 게시글 정보 삭제
-    $arr_param = [
-        "no" => $no
-    ];
-    $result = db_delete_boards_no($conn, $arr_param);
+        //Transaction 시작
+        $conn->beginTransaction();
 
-    // 삭제 예외 처리
-    if($result !== 1 ){
-        throw new Exception("Delete Boards no count");
+        // 게시글 정보 삭제
+        $arr_param = [
+            "no" => $no
+        ];
+        $result = db_delete_boards_no($conn, $arr_param);
+
+        // 삭제 예외 처리
+        if($result !== 1 ){
+            throw new Exception("Delete Boards no count");
+        }
+
+        // commmit
+        $conn->commit();
+        header("Location: list.php");
+        exit;
     }
-
-    // commmit
-    $conn->commit();
-    header("Location: list.php");
-    exit;
-}
 
 } catch (\Throwable $err) {
     if(!empty($conn)) {

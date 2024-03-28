@@ -8,5 +8,5 @@ CREATE TABLE boards1 (
 	,content	 	VARCHAR(1000)		NOT NULL
 	,created_at		DATETIME			NOT NULL DEFAULT CURRENT_TIMESTAMP()
 	,updated_at		DATETIME			NOT NULL DEFAULT CURRENT_TIMESTAMP()
-	,delete_at		DATETIME
+	,deleted_at		DATETIME
 );

@@ -162,7 +162,9 @@
 
 .a-button {
     text-decoration: none;
-    color : #fff;
+    border: none;
+    background-color: rgb(70, 70, 70);
+    color : white;
     font-size: 1.2rem;
     display: inline-block;
     border-radius: 30px;
@@ -171,6 +173,21 @@
 }
 
 .a-button:hover {
+    background-color: #808080;
+}
+
+
+.small-button {
+    text-decoration: none;
+    color : #fff;
+    font-size: 1.2rem;
+    display: inline-block;
+    border-radius: 30px;
+    text-align: center;
+    padding: 1rem;
+}
+
+.small-button:hover {
     background-color: #808080;
 }
 
@@ -184,8 +201,29 @@
 .li_main_item {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    justify-content: center;
     gap: 15px;
     padding: 1rem 2rem 2rem;
+}
+
+.li_main_item2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    justify-content: center;
+    gap: 15px;
+    padding: 1rem 2rem 2rem;
+
+}
+
+input, textarea {
+    width: 90%;
+    background-color: transparent;
+    border-style: none;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+textarea {
+    resize: none;
 }
 
 .li_main_card {
@@ -206,6 +244,6 @@
 .li_card_item {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    background-color: rgb(174, 228, 253);
+    background-color: rgb(104, 199, 243);
     padding: 1rem;
 }

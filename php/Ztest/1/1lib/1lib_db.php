@@ -18,7 +18,7 @@ function db_select_boards_cnt($conn) {
         " SELECT " 
         ."	COUNT(no) as cnt " 
         ." FROM " 
-        ."	boards " 
+        ."	boards1 " 
         ." WHERE " 
         ."	deleted_at IS NULL "
         ;
@@ -42,7 +42,7 @@ function db_select_boards_paging(&$conn, &$array_param) {
         ."  ,title " 
         ."  ,created_at " 
         ." FROM " 
-        ."  boards " 
+        ."  boards1 " 
         ." WHERE " 
         ."  deleted_at IS NULL " 
         ." ORDER BY  " 
@@ -63,7 +63,7 @@ function db_select_boards_paging(&$conn, &$array_param) {
 // ■ Insert row to boards 게시판 테이블 레코드 작성처리
 function dba_insert_boards(&$conn, &$array_param) {
     $sql =
-        " INSERT INTO boards( "
+        " INSERT INTO boards1( "
         ." title "
         ." ,content "
         ." ) "
@@ -91,7 +91,7 @@ function db_select_boards_no(&$conn, &$array_param) {
         ."	,content " 
         ."	,created_at " 
         ." FROM 		" 
-        ."	boards " 
+        ."	boards1 " 
         ." WHERE " 
         ."	no = :no "
     ;
@@ -109,11 +109,33 @@ function db_select_boards_no(&$conn, &$array_param) {
 function db_delete_boards_no(&$conn, &$array_param) {
     // SQL
     $sql =
-        " UPDATE boards "
+        " UPDATE boards1 "
         ." SET "
         ." deleted_at = NOW() "
         ." WHERE "
         ." no = :no "
+    ;
+
+    // Query 실행
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+
+    // 리턴
+    return $stmt->rowCount(); 
+}
+
+
+// pk로 특정 레코드 수정
+function db_update_boards_no(&$conn, &$array_param) {
+    // SQL
+    $sql =
+        " UPDATE boards1 "
+        ." SET "
+        ."  title = :title "
+        ."  ,content = :content "
+        ." ,updated_at = NOW() "
+        ." WHERE "
+        ."  no = :no "
     ;
 
     // Query 실행
