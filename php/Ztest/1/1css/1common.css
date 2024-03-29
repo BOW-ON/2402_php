@@ -149,7 +149,7 @@
     color : #fff;
     width: 100px;
     display: inline-block;
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(75, 75, 75);
     border-radius: 5px;
     text-align: center;
     padding: 1rem;
@@ -163,19 +163,32 @@
 .a-button {
     text-decoration: none;
     border: none;
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(80, 80, 80);
     color : white;
     font-size: 1.2rem;
     display: inline-block;
     border-radius: 30px;
     text-align: center;
-    padding: 1rem;
+    padding: 1rem 2rem;
+}
+
+.li-button {
+    text-decoration: none;
+    border: none;
+    color : white;
+    font-size: 1.2rem;
+    display: inline-block;
+    text-align: center;
 }
 
 .a-button:hover {
     background-color: #808080;
 }
 
+.b-tutton {
+    display: block;
+    text-align: center;
+}
 
 .small-button {
     text-decoration: none;
@@ -200,7 +213,7 @@
 
 .li_main_item {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 700px));
     justify-content: center;
     gap: 15px;
     padding: 1rem 2rem 2rem;
@@ -222,6 +235,9 @@ input, textarea {
     border: 1px solid white;
     border-radius: 5px;
 }
+input {
+    height: 2rem;
+}
 textarea {
     resize: none;
 }
@@ -229,6 +245,7 @@ textarea {
 .li_main_card {
     border: 2px solid white;
     height: 250px;
+    text-align: center;
 }
 
 .li_main_card > .li_a {

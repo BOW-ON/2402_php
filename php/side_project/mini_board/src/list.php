@@ -83,9 +83,9 @@ try {
             <?php 
             for($num = 1; $num <= $max_page_num; $num++) {
             ?>
-                <a href="./list.php?page=<?php echo $num ?>" class="a-button small-button"><?php echo $num ?></a>
+                <a href="./list.php?page=<?php echo $num ?>" class="a-button small-button"><?php echo $num ?></a> 
             <?php 
-            }  
+            }
             ?>
             <a href="./list.php?page=<?php echo $next_page_num ?>" class="a-button small-button">다음</a>
         </div>

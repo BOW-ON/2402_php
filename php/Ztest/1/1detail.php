@@ -70,8 +70,10 @@ try {
         <div class="li_main">
             <div class="li_main_header">
                 <div class="li_main_name">상세 PAGE</div>
-                <a href="./1update.php?no=<?php echo $no ?>&page=<?php echo $page ?>" class="a-button small-button">수정</a>
-                <a href="./1delete.php?no=<?php echo $no ?>&page=<?php echo $page ?>" class="a-button small-button">삭제</a>
+                <div class="b-button">
+                    <a href="./1update.php?no=<?php echo $no ?>&page=<?php echo $page ?>" class="a-button small-button">수정</a>
+                    <a href="./1delete.php?no=<?php echo $no ?>&page=<?php echo $page ?>" class="a-button small-button">삭제</a>
+                </div>
             </div>
             <div class="li_main_item">
                 <div class="li_main_card">

@@ -65,7 +65,7 @@ try {
             <div class="li_main_header">
                 <div class="li_main_name">LIST</div>
                 <div class="li_create_btn">
-                    <a class="small-button" href="./1insert.php">글 작성</a>
+                    <a class="a-button" href="./1insert.php">글 작성</a>
                 </div>
                 <div class="main-bottom">
                     <a href="./1list.php?page=<?php echo $prev_page_num ?>" class="small-button">이전</a>
@@ -84,7 +84,7 @@ try {
                 foreach($result as $item) {
                 ?>   
                 <div class="li_main_card">
-                    <a href="./1detail.php?no=<?php echo $item["no"]?>&page=<?php echo $page_num ?>">
+                    <a class="li-button" href="./1detail.php?no=<?php echo $item["no"]?>&page=<?php echo $page_num ?>">
                         <div class="li_card_item">
                             <div class="li_card_no">no</div>
                             <div class="li_card_no2"><?php echo $item["no"] ?> </div>
