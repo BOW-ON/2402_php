@@ -83,19 +83,19 @@ if (REQUEST_METHOD === "POST" ) {
                 <div class="li_main_header">
                     <div class="li_main_name">작성 PAGE</div>
                     <div class="b-tutton">
-                        <button type="submit" class="a-button">작성</button>
+                        <button type="submit" class="a-button">작성완료</button>
                     </div>
                 </div>
                 <div class="li_main_item">
                     <div class="li_main_card">
                         <div class="li_card_item">
-                            <label for="title" class="li_card_name"><h2>제목</h2></label>
+                            <label for="title" class="li_card_name"><h2>title</h2></label>
                             <div class="li_card_name2">
                                 <input type="text" name="title" id="title">
                             </div>
                         </div>   
                         <div class="li_card_item">
-                            <label for="content" class="li_card_name"><h2>내용</h2></label>
+                            <label for="content" class="li_card_name"><h2>content</h2></label>
                             <div class="li_card_name2">
                                 <textarea name="content" id="content" cols="auto" rows="8"></textarea>                    
                             </div>

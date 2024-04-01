@@ -18,8 +18,19 @@ try {
     // 페이지 관련 설정 셋팅
     $max_page_num = ceil($result_board_cnt / $list_cnt); // 최대 페이지 수
     $offset = $list_cnt * ($page_num - 1); // 오프셋
+    
+    
+    // 페이지네이션
+    $start_page = ceil($page_num / $list_cnt) * $list_cnt - ($list_cnt - 1);
+    $end_page = $start_page + ($list_cnt - 1);
+    $end_page = $end_page > $max_page_num ? $max_page_num : $end_page;
+
+
     $prev_page_num = ($page_num -1) < 1 ? 1 : ($page_num - 1) ; // 이전 버튼 페이지 번호
     $next_page_num = ($page_num +1) > $max_page_num  ? $max_page_num : ($page_num + 1); // 다음 버튼 페이지 번호
+
+
+
 
     // 게시글 리스트 조회
     $arr_param =[
@@ -70,11 +81,11 @@ try {
                 <div class="main-bottom">
                     <a href="./1list.php?page=<?php echo $prev_page_num ?>" class="small-button">이전</a>
                     <?php 
-                    for($num = 1; $num <= $max_page_num; $num++) {
+                      for($num = $start_page; $num <= $end_page; $num++) {
                     ?>
-                        <a href="./1list.php?page=<?php echo $num ?>" class="small-button"><?php echo $num ?></a>
+                    <a href="./1list.php?page=<?php echo $num ?>" class="small-button"><?php echo $num;?></a>
                     <?php 
-                    }  
+                     }  
                     ?>
                     <a href="./1list.php?page=<?php echo $next_page_num ?>" class="small-button">다음</a>
                 </div>

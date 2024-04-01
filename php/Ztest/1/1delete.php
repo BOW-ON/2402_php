@@ -125,15 +125,15 @@ try {
                         <div class="li_card_no2"><?php echo $item["no"] ?></div>
                     </div>
                     <div class="li_card_item">
-                        <div class="li_card_name">제목</div>
+                        <div class="li_card_name">title</div>
                         <div class="li_card_name2"><?php echo $item["title"] ?></div>
                     </div>   
                     <div class="li_card_item">
-                        <div class="li_card_no">작성일자</div>
+                        <div class="li_card_no">created</div>
                         <div class="li_card_no2"><?php echo $item["content"] ?></div>
                     </div>
                     <div class="li_card_item">
-                        <div class="li_card_name">내용</div>
+                        <div class="li_card_name">content</div>
                         <div class="li_card_name2"><?php echo $item["created_at"] ?></div>
                     </div>   
                 </div>
