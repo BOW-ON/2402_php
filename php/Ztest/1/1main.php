@@ -12,7 +12,7 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>To Do List</title>
     <link rel="stylesheet" href="./1css/1common.css">
 </head>
 <body>
@@ -37,7 +37,7 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
         </div>
         <div class="main_container5 mc_flex">
             <div class="mc_building5"></div>
-            <div class="mc_building55">ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
+            <div class="mc_building55">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ<br>ㅁ</div>
         </div>
         <div class="main_container6 mc_flex">
             <div class="mc_building6"></div>

@@ -68,13 +68,13 @@ try {
     <div class="list_container">
         <div class="li_header">
             <div class="li_header_back">
-                <a class="li_a" href="./1main.php">back</a>
+                <a class="li_a" href="./1main.php">home</a>
             </div>
         </div>
 
         <div class="li_main">
             <div class="li_main_header">
-                <div class="li_main_name">LIST</div>
+                <div class="li_main_name">LIST PAGE</div>
                 <div class="li_create_btn">
                     <a class="a-button" href="./1insert.php">글 작성</a>
                 </div>
