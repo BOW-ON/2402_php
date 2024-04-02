@@ -145,3 +145,82 @@ function db_update_boards_no(&$conn, &$array_param) {
     // 리턴
     return $stmt->rowCount(); 
 }
+
+
+
+
+
+// 상세페이지에서 이전 버튼, 다음 버튼
+// 함수
+function next_btn(&$conn, &$array_param){
+    $sql =
+        " SELECT "
+        ." no "
+        ." FROM "
+        ." boards1 "
+        ." WHERE "
+        ." no > :no "
+        ." AND deleted_at IS NULL "
+        ." ORDER BY no ASC "
+        ." LIMIT 1 "
+    ;
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+    $result = $stmt->fetchColumn();
+
+    return $result ? $result : null;
+}
+function prev_btn(&$conn, &$array_param){
+    $sql=
+        " SELECT "
+        ." no" 
+        ." FROM "
+        ." boards1 " 
+        ." WHERE "
+        ." no < :no " 
+        ." AND "
+        ." deleted_at IS NULL " 
+        ." ORDER BY no DESC " 
+        ." LIMIT 1 "
+    ;
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+    $result = $stmt->fetchColumn();
+
+    return $result ? $result : null;
+}
+
+function max_no_sql(&$conn){
+    $sql =
+        " SELECT "
+        ." MAX(no) no "
+        ." FROM boards1 "
+        ." WHERE "
+        ." deleted_at IS NULL "
+    ;
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+
+    return $result[0]["no"];
+}
+
+function min_no_sql(&$conn){
+    $sql =
+        " SELECT "
+        ." MIN(no) no "
+        ." FROM "
+        ." boards1 "
+        ." WHERE "
+        ." deleted_at IS NULL "
+    ;
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+
+    return $result[0]["no"];
+}

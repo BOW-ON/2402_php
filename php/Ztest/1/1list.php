@@ -21,7 +21,7 @@ try {
     
     
     // 페이지네이션
-    $start_page = ceil($page_num / $list_cnt) * $list_cnt - ($list_cnt - 1);
+    $start_page = (int)(ceil($page_num / $list_cnt) * $list_cnt - ($list_cnt - 1));
     $end_page = $start_page + ($list_cnt - 1);
     $end_page = $end_page > $max_page_num ? $max_page_num : $end_page;
 
@@ -51,7 +51,6 @@ try {
         $conn = null;
     }
 }
-
 ?>
 
 
@@ -66,6 +65,10 @@ try {
 <body>
     <?php require_once(FILE_HEADER) ?>
     <div class="list_container">
+        <div class="moon">
+            <div class="moon1"></div>
+            <div class="moon2"></div>
+        </div>
         <div class="li_header">
             <div class="li_header_back">
                 <a class="li_a" href="./1main.php">home</a>
@@ -83,7 +86,7 @@ try {
                     <?php 
                       for($num = $start_page; $num <= $end_page; $num++) {
                     ?>
-                    <a href="./1list.php?page=<?php echo $num ?>" class="small-button"><?php echo $num;?></a>
+                    <a href="./1list.php?page=<?php echo $num ?>" class="small-button <?php echo ($num === (int)$page_num) ? "color-button" : ""; ?>"><?php echo $num ?></a>
                     <?php 
                      }  
                     ?>

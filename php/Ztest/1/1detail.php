@@ -33,6 +33,14 @@ try {
         throw new Exception("Select Boards no count");
     }
 
+    // 상세 페이지에 이전 버튼, 다음 버튼 만들기
+    $max_board_no = max_no_sql($conn);
+    $min_board_no = min_no_sql($conn);
+    $prev_btn_result = prev_btn($conn, $arr_param);
+    $next_btn_result = next_btn($conn, $arr_param);
+
+
+
     // 아이템 셋팅
     $item = $result[0];
 
@@ -62,6 +70,10 @@ try {
 <body>
     <?php require_once(FILE_HEADER) ?>
     <div class="list_container">
+        <div class="moon">
+            <div class="moon1"></div>
+            <div class="moon2"></div>
+        </div>
         <div class="li_header">
             <div class="li_header_back">
                 <a class="li_a" href="./1list.php">back</a>
@@ -71,8 +83,20 @@ try {
             <div class="li_main_header">
                 <div class="li_main_name">상세 PAGE</div>
                 <div class="b-button">
+
+
+                    <a href="./1detail.php?no=<?php if($prev_btn_result !== null){ echo $prev_btn_result; } if($no == $min_board_no){ echo $min_board_no; }?>&page=<?php echo $page ?>" class="a-button small-button">이전글</a>
+
+                    
+                    
                     <a href="./1update.php?no=<?php echo $no ?>&page=<?php echo $page ?>" class="a-button small-button">수정</a>
                     <a href="./1delete.php?no=<?php echo $no ?>&page=<?php echo $page ?>" class="a-button small-button">삭제</a>
+
+
+
+                    <a href="./1detail.php?no=<?php if($next_btn_result !== null){ echo $next_btn_result; } if($no == $max_board_no){ echo $max_board_no; } ?>&page=<?php echo $page ?>" class="a-button small-button">다음글</a>
+                
+                
                 </div>
             </div>
             <div class="li_main_item">

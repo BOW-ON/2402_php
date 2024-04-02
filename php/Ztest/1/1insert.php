@@ -74,6 +74,10 @@ if (REQUEST_METHOD === "POST" ) {
     <?php require_once(FILE_HEADER) ?>
     <form action="./1insert.php" method="post">
         <div class="list_container">
+            <div class="moon">
+                <div class="moon1"></div>
+                <div class="moon2"></div>
+            </div>
             <div class="li_header">
                 <div class="li_header_back">
                     <a class="li_a" href="./1list.php">back</a>

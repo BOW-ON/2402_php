@@ -116,6 +116,10 @@ try {
         <input type="hidden" name="no" value="<?php echo $item["no"];?>">
         <input type="hidden" name="page" value="<?php echo $page; ?>">
         <div class="list_container">
+            <div class="moon">
+                <div class="moon1"></div>
+                <div class="moon2"></div>
+            </div>
             <div class="li_header">
                 <div class="li_header_back">
                     <a href="./1detail.php?no=<?php echo $no ?>&page=<?php echo $page?>" class ="li_a">back</a>
