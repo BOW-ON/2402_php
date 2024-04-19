@@ -46,7 +46,7 @@ mylocalPrint();
 // console.log(localStr); 지역 변수라서 오류 발생
 
 // 3-3. 블록 레벨 스코프
-// {    }로 둘러싸인 범윔 (함수, if, for 등등..)
+// {    }로 둘러싸인 범위 (함수, if, for 등등..)
 function myBlock(){
     if(true) {
         var test1 = 'var';
