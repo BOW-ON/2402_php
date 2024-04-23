@@ -88,6 +88,7 @@ ODD_CHILD.forEach(node => node.style.color = 'blue');
 
 // sol2)
 const CSS_CLS_ALL_li = document.querySelectorAll('li');
+// forEach에서 받아올때 처음은 값, 두번째는 키를 받아온다
 CSS_CLS_ALL_li.forEach(function(node, key) {
         if(key % 2 === 0) {
             node.style.color = 'red';

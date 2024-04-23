@@ -4,12 +4,12 @@
 
 // 1. 함수 선언식
 function mySum(a, b) {
-    return a + b;
+    return a + b
 }
 console.log(mySum(1,2));
 
 function mySum(a, b) {
-    console.log('재할당')
+    console.log('재할당');
 }
 
 // 2. 함수 표현식
