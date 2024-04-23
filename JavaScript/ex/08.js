@@ -48,7 +48,7 @@ switch(검증 대상) {
 
 // ex2) 나이가 20이면 '20대', 30이면 '30대', 나머지는 '모르겠다'
 let age = 29;
-switch (age) {
+switch(age) {
     case 20 : 
         console.log('20대');
         break;  
@@ -77,7 +77,7 @@ for(let i = 1; i < 11; i++){
 
 // 3-1. while문
 let cnt = 1;
-while (cnt <= 10) {
+while(cnt <= 10) {
     if (cnt % 3 === 0) {
         cnt++;
         continue;
@@ -137,12 +137,12 @@ const OBJ = {
     ,key2: 'val2'
 };
 console.log(OBJ.key1);
-for (let key in OBJ) {
+for(let key in OBJ) {
     console.log(OBJ[key]); // key만 가져오므로 값을 원한다면 '객체[키값]' 으로 불러와야됨
 }
 
 const ARR1 = [1, 2, 3];
-for (let key in ARR1) {
+for(let key in ARR1) {
     console.log(ARR1[key]);
 }
 
@@ -152,6 +152,6 @@ for (let key in ARR1) {
 //  **>> 변수.length를 사용할수 있는 경우가 iterable한다는 뜻
 // value에만 접근이 가능
 const STR1 = '안녕하세요';
-for (let val of STR1) {
+for(let val of STR1) {
     console.log(val);
 }

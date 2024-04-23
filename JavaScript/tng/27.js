@@ -15,5 +15,18 @@ let even = even1.sort((a, b) => a - b )
 console.log(even);
 
 let odd1 = ARR2.filter( val => val % 2 === 1);
+// let odd1 = ARR2.filter( val => val % 2 !== 0);
 let odd = odd1.sort((a, b) => a - b )
 console.log(odd);
+
+// sol2)
+const EVEN2 = [];
+const ODD2 = [];
+ARR2.forEach(num => {
+    if(num % 2 === 0) {
+        EVEN2[EVEN2.length] = num;
+    } else {
+        ODD2[ODD2.length] = num;
+    }
+})
+console.log(EVEN2, ODD2);
