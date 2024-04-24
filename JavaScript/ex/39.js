@@ -76,15 +76,13 @@ TITLE.classList.toggle('none');
 
 
 // ex) 리스트의 요소들의 글자색을 짝수는 빨강, 홀수는 파랑으로 수정
-//sol1)
-//짝수
+// sol1)
+// 짝수
 const EVEN_CHILD = document.querySelectorAll('#ul > li:nth-child(even)');
 EVEN_CHILD.forEach(node => node.style.color = 'red');
 // 홀수
 const ODD_CHILD = document.querySelectorAll('#ul > li:nth-child(odd)');
 ODD_CHILD.forEach(node => node.style.color = 'blue');
-
-
 
 // sol2)
 const CSS_CLS_ALL_li = document.querySelectorAll('li');
@@ -96,3 +94,52 @@ CSS_CLS_ALL_li.forEach(function(node, key) {
             node.style.color = 'blue';
         }
     });
+
+
+// A)
+const ITEMS = document.querySelectorAll('#ul > li')
+ITEMS.forEach((item,key) => (item.style.color = key % 2 === 0 ? 'red' : 'blue'));
+
+
+// ----------------
+// *새로운 요소 생성
+// ----------------
+// 1. createElement(태그명) : 새로운 요소 생성
+const NEW_LI = document.createElement('li');
+NEW_LI.innerHTML = '광산게임';
+
+const TARGET = document.querySelector('#ul'); // 삽입할 부모요소 선택
+// 2. appendChild(노드) : 해당 부모 노드에 마지막 자식으로 노드 추가
+TARGET.appendChild(NEW_LI);
+// 동일한 형태의 요소를 여러개 추가하는 법
+// for (let i = 0; i > 3; i++) {
+//     const LI = document.createElement('li');
+//     LI.innerHTML = '쿠키게임';
+//     const TARGET2 = document.querySelector('#ul');
+//     TARGET2.appendChild(LI);
+// }
+
+// 3. insertBefore(새로운노드, 기존노드) : 해당 부모 노드의 자식인 기준노드 앞에 새로운 노드 추가
+const NEW_LI2 = document.createElement('li');
+NEW_LI2.innerHTML = '굴착소년쿵야';
+
+const LI2_STANDARD = document.querySelector('#ul > li:nth-child(3)'); // 기준 노드
+TARGET.insertBefore(NEW_LI2, LI2_STANDARD);
+
+// ex) '프리셀'을 스페이스와 사과게임 사이에 넣기
+// sol1)
+const NEW_LI3 = document.createElement('li');
+NEW_LI3.innerHTML = '프리셀';
+
+const LI3_STANDARD = document.querySelector('#ul > li:nth-child(5)');
+TARGET.insertBefore(NEW_LI3, LI3_STANDARD);
+
+// A)
+const NEW_LI4 = document.createElement('li');
+NEW_LI4.innerHTML = '프리셀2';
+
+const APPLE = document.querySelector('#apple');
+TARGET.insertBefore(NEW_LI4, APPLE);
+
+// 4. removeChild() : 해당 부모 노드의 자식을 삭제
+TARGET.removeChild(NEW_LI4);
