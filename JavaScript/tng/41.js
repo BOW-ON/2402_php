@@ -4,7 +4,7 @@ const lpadZero = (val, length) => {
     return String(val).padStart(length,'0')
 }
 let TIME;
-let cnt = 1;
+// let cnt = 1;
 function time() {
     TIME = setInterval(() => {    
         const NOW = new Date();
@@ -19,7 +19,7 @@ function time() {
         const SECOND = lpadZero(NOW.getSeconds(), 2);
     
         const FORMAT_DATE = `현재 시각 ${AMPM} ${HOUR}:${MINUTE}:${SECOND}`
-        cnt++
+        // cnt++
         // console.log(FORMAT_DATE);
     
         const BTN_TIME = document.querySelector('#time');
