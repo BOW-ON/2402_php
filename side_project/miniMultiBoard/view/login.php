@@ -19,11 +19,15 @@
   </header>
   <main class="d-flex justify-content-center align-items-center h-75">
     <form style ="width: 400px" action="/user/login" method="post">
-      <div class="form-text text-danger">에러에러에러</div>
+      <?php
+        foreach($this->arrErrorrMsg as $val){
+          echo '<div class="form-text text-danger">'.$val.'</div>';
+        }
+      ?>
         <label for="u_email" class="form-label">이메일</label>
-        <input type="text" class="form-control mb-3" id="u_email" name="u_email" required>
+        <input type="text" class="form-control mb-3" id="u_email" name="u_email">
         <label for="u_pw" class="form-label">비밀번호</label>
-        <input type="password" class="form-control mb-3" id="u_pw" name="u_pw" required>
+        <input type="password" class="form-control mb-3" id="u_pw" name="u_pw">
         <button type="submit" class="btn btn-dark">로그인</button>
       </div>
     </form>
