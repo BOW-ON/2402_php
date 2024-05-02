@@ -17,7 +17,7 @@ CREATE TABLE boards (
 	b_id				INT			 	PRIMARY KEY AUTO_INCREMENT
 	,u_id				INT 				NOT NULL
 	,b_type			CHAR(1)			NOT NULL
-	,b_tittle		VARCHAR(50)		NOT NULL
+	,b_title			VARCHAR(50)		NOT NULL
 	,b_content		VARCHAR(1000)	NOT NULL
 	,b_img			VARCHAR(256) 
 	,created_at		DATETIME			NOT NULL DEFAULT CURRENT_TIMESTAMP()
@@ -49,5 +49,12 @@ VALUES('admin@admin.com','qwer1234!','관리자');
 
 
 
-
+-- 테스트용 게시글 추가
+INSERT INTO boards(u_id, b_type, b_title ,b_content ,b_img)
+VALUES ('1', '0', '자유1', '자유내용1', '/view/img/o1.png')
+,('1', '0', '자유2', '자유내용2', '/view/img/o2.png')
+,('1', '0', '자유3', '자유내용3', '/view/img/f1.png')
+,('1', '1', '질문1', '질문내용1', '/view/img/d1.png')
+,('1', '1', '질문2', '질문내용2', '/view/img/h3.png')
+;
 
