@@ -25,10 +25,39 @@ class UsersModel extends Model {
 
             return count($result) > 0 ? $result[0] : $result;
         } catch (\Throwable $th) {
-            echo "UserModel -> getUserInfo(), ".$th->getMessage();
+            echo "UsersModel -> getUserInfo(), ".$th->getMessage();
             exit;
         }
     }
+
+    // 회원 정보 인서트
+    public function addUserInfo($paramArr) {
+        try {
+            $sql =
+                " INSERT INTO users( "
+                ."  u_email "
+                ."  ,u_pw "
+                ."  ,u_name "
+                ." ) "
+                ." VALUES( "
+                ."  :u_email "
+                ."  ,:u_pw "
+                ."  ,:u_name "
+                ." ) "
+            ;
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($paramArr);
+            $result = $stmt->rowCount();
+
+            return $result;
+        } catch (\Throwable $th) {
+            echo "UsersModel -> getUserInfo(), ".$th->getMessage();
+            exit;
+        }
+    }
+
+
 }
 
 

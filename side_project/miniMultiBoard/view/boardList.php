@@ -13,41 +13,11 @@
   <script src="/view/js/board.js" defer></script>
   <!-- axios 연결(로드 : unpkg CDN 사용) -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <title>자유게시판</title>
+  <title><?php echo $this->boardName; ?></title>
 </head>
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <!-- 색상변경 -->
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">미니보드</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                게시판
-              </a>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown"> <!-- 색상변경 -->
-                  <!-- 게시판 -->
-                  <?php 
-                    foreach($this->arrBoardsNameInfo as $item) {
-                  ?>
-
-                    <li><a class="dropdown-item" href="/board/list?b_type=<?php echo $item["b_type"]; ?>"><?php echo $item["bn_name"]; ?></a></li>
-
-                  <?php    
-                    }
-                  ?>
-                </ul>
-            </li>
-          </ul>
-          <a href="/user/logout" class="navbar-nav nav-link text-light" role="button">로그아웃</a>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <!-- 헤더 -->
+  <?php require_once("view/inc/header.php"); ?>
     
   <div class="text-center mt-5 mb-5"> <!-- 중앙정렬, 마진(1 = 0.25rem) -->
     <h1><?php echo $this->boardName; ?></h1> <!-- 게시판 제목 -->
@@ -73,8 +43,17 @@
       foreach($this->arrBoardList as $item) {
     ?>
     
-    <div class="card">
-      <img src="<?php echo $item["b_img"]; ?>" class="card-img-top" alt="이미지">
+    <div class="card" id="card<?php echo $item["b_id"]; ?>">
+      <?php
+        if(!empty($item["b_img"])){
+      ?>
+        <img src="<?php echo $item["b_img"]; ?>" class="card-img-top">
+      <?php    
+        }
+      ?>
+      <!-- 같은 처리 -->
+      <!-- <img src="<?php //echo empty($item["b_img"]) ? "" : $item["b_img"]; ?>" class="card-img-top"> -->
+
         <div class="card-body">
           <h5 class="card-title"><?php echo $item["b_title"]; ?></h5>
           <p class="card-text"><?php echo $item["b_content"]; ?></p>
@@ -97,18 +76,30 @@
   <div class="modal" tabindex="-1" id="modalDetail">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">제목</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>내용</p>
-          <br>
-          <img src="./img/otter_face_end.png" class="card-img-top" alt="이미지">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        </div>
+        <form action="" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title">제목</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>내용</p>
+            <br>
+            <?php
+              if(!empty($item["b_img"])){
+            ?>
+              <img src="<?php echo $item["b_img"]; ?>" class="card-img-top">
+            <?php    
+              }
+            ?>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <div>
+              <!-- <button type="button" class="btn btn-warning">수정</button> -->
+              <button id="my-btn-delete" type="button" class="btn btn-danger" data-bs-dismiss="modal">삭제</button>
+            </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -128,7 +119,7 @@
             <!-- textarea -->
             <textarea class="form-control" name="b_content" cols="30" rows="10" placeholder="제목을 입력하세요."></textarea>
             <br><br>
-            <input type="file" name="img" accept="image/*">
+            <input type="file" name="img" accept="video/*">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

@@ -53,9 +53,12 @@ class BoardController extends Controller {
 
     // 게시글 작성 메소드
     public function addPost() {
-        // 이미지 파일 패스 작성
-        $path = "/"._PATH_IMG.$_FILES["img"]["name"];
-        move_uploaded_file($_FILES["img"]["tmp_name"], _ROOT.$path);
+        // 이미지 파일 패스 작성 (이미지 파일 처리)
+        $path = "";
+        if(!empty($_FILES["img"]["name"])){
+            $path = "/"._PATH_IMG.$_FILES["img"]["name"];
+            move_uploaded_file($_FILES["img"]["tmp_name"], _ROOT.$path);
+        }
 
 
         $requestData = [
@@ -87,15 +90,19 @@ class BoardController extends Controller {
     
         // 게시글 정보 조회
         $modelBoards = new BoardsModel();
-        $resultBoards = $modelBoards->getBoard($requestData);
+        $resultBoard = $modelBoards->getBoard($requestData);
+
+        // 로그인 유저 pk 추가
+        $resultBoard[0]["login_u_id"] = $_SESSION["u_id"];
 
         // JSON 변환
-        $response = json_encode($resultBoards);
+        $response = json_encode($resultBoard);
 
         // response 처리
         header('Content-type: application/json');
         echo $response;
         exit;
+
 
     }
 
