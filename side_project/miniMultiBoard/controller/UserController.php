@@ -22,7 +22,7 @@ class UserController extends Controller {
         // TODO : 나중에 구현
         $resultValidator = UserValidator::chkValidator($requestData); // static으로 만들어서 바로 호출
         if(count($resultValidator) > 0){
-            $this->arrErrorrMsg = $resultValidator;
+            $this->arrErrorMsg = $resultValidator;
             return "login.php";
         }
 
@@ -34,7 +34,7 @@ class UserController extends Controller {
         // 유저 존재 유무 체크
         if(empty($resultUserInfo)){
             // 에러메세지
-            $this->arrErrorrMsg[] = "아이디와 비밀번호를 다시 확인해 주세요.";
+            $this->arrErrorMsg[] = "아이디와 비밀번호를 다시 확인해 주세요.";
 
             return "login.php";
         }

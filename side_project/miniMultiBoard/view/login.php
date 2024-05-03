@@ -22,7 +22,7 @@
   <main class="d-flex justify-content-center align-items-center h-75">
     <form style ="width: 400px" action="/user/login" method="post">
       <?php
-        foreach($this->arrErrorrMsg as $val){
+        foreach($this->arrErrorMsg as $val){
           echo '<div class="form-text text-danger">'.$val.'</div>';
         }
       ?>
