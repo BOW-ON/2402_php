@@ -153,4 +153,74 @@ class UserController extends Controller {
         return base64_encode($pw.$email);
     }
 
+    // 회원정보 수정 페이지 이동
+    
+    private $calluser;
+    public function getCallUser($key){
+        return $this->callUser[$key];
+    }
+
+    protected function editGet(){
+        $requestData = [
+            "u_id" => $_SESSION["u_id"]
+        ];
+        $modelUsers = new UsersModel();
+        //$_SESSION['callUser'] = $modelUsers->callUser($requestData);
+        $this->callUser = $modelUsers->callUser($requestData);
+        
+        return "edit.php";
+    }
+
+    // 회원정보 수정 처리
+    protected function editPost(){
+        $modelUsers = new UsersModel();
+
+        $requestData2 = [
+            "u_id" => $_SESSION["u_id"]
+        ];
+        // 이름, 이메일 가져오기
+        // $callUser = $modelUsers->callUser($requestData2);
+        $this->callUser = $modelUsers->callUser($requestData2);
+        
+
+        $requestData3 = [
+            "u_id" => $_SESSION["u_id"]
+            ,"u_name" => $_POST["u_name"]
+            ,"u_pw" => $_POST["u_pw"]
+            ,"u_pw2" => $_POST["u_pw2"]
+        ];
+        // 유효성 체크
+        $resultValidator = UserValidator::chkValidator($requestData3); // static으로 만들어서 바로 호출
+        if(count($resultValidator) > 0){
+            $this->arrErrorMsg = $resultValidator;
+            return "edit.php";
+        }
+        
+
+        $requestData = [
+            // "u_email" => $callUser[0]["u_email"]
+            "u_email" => $this->getCallUser("u_email")
+            ,"u_name" => $_POST["u_name"]
+            ,"u_pw" => $_POST["u_pw"]
+        ];
+
+        // 비밀번호 암호화
+        $requestData["u_pw"] = $this->encryptionPassword($requestData["u_pw"], $requestData["u_email"]);
+
+        // 회원 정보 수정 처리
+        $modelUsers->beginTransaction();
+        $resultUserInsert = $modelUsers->editUser($requestData);
+        if($resultUserInsert === 1) {
+            $modelUsers->commit();
+        } else {
+            $modelUsers->rollback();
+            $this->arrErrorMsg = ["회원정보 수정에 실패하였습니다."];
+            return "edit.php";
+        }
+
+
+        return "Location: /user/edit";
+    }
+
+
 }

@@ -54,15 +54,15 @@
       <!-- 같은 처리 -->
       <!-- <img src="<?php //echo empty($item["b_img"]) ? "" : $item["b_img"]; ?>" class="card-img-top"> -->
 
-        <div class="card-body">
-          <h5 class="card-title"><?php echo $item["b_title"]; ?></h5>
-          <p class="card-text"><?php echo $item["b_content"]; ?></p>
-          <button
-            value="<?php echo $item["b_id"]; ?>"
-            class="btn btn-primary my-btn-detail"
-            data-bs-toggle="modal"
-            data-bs-target="#modalDetail">상세</button>
-        </div>
+      <div class="card-body">
+        <h5 class="card-title"><?php echo $item["b_title"]; ?></h5>
+        <p class="card-text"><?php echo $item["b_content"]; ?></p>
+        <button
+          value="<?php echo $item["b_id"]; ?>"
+          class="btn btn-primary my-btn-detail"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDetail">상세</button>
+      </div>
     </div>
     
     <?php

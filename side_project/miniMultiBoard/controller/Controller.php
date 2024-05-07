@@ -41,6 +41,8 @@ class Controller {
         exit; // 모든 처리 종료
     }
 
+
+    
     // 뷰 OR 로케이션 처리용 메소드
     private function callView($path){
         if (strpos($path,"Location:") === 0) {

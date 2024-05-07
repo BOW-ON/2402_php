@@ -57,6 +57,56 @@ class UsersModel extends Model {
         }
     }
 
+    // 회원정보 수정 처리 처리
+    public function editUser($paramArr) {   
+        try {
+            $sql =
+                " UPDATE users "
+                ." SET "
+                ."  u_name = :u_name "
+                ."  ,u_pw = :u_pw "
+                ."  ,updated_at = NOW() "
+                ." WHERE "
+                ."  u_email = :u_email "
+            ; 
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($paramArr);
+            $result = $stmt->rowCount();
+
+            return count($result) > 0 ? $result[0] : $result;
+        } catch (\Throwable $th) {
+            echo "UsersModel -> editUser(), ".$th->getMessage();
+            exit;
+        }
+    }
+
+
+    // 이름, 이메일 불러오기
+    public function callUser($paramArr) {
+        try {
+            $sql =
+                " SELECT "
+                ." u_name "
+                ." ,u_email "
+                ." FROM "
+                ."  users "
+                ." WHERE "
+                ."  u_id = :u_id "
+            ;
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($paramArr);
+            $result = $stmt->fetchAll();
+
+            return $result;
+        } catch (\Throwable $th) {
+            echo "UsersModel -> getUserInfo(), ".$th->getMessage();
+            exit;
+        }
+
+    }
+
 
 }
 

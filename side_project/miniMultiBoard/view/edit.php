@@ -12,30 +12,27 @@
   <script src="/view/js/regist.js" defer></script>
   <!-- axios 연결(로드 : unpkg CDN 사용) -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <title>회원가입</title>
+  <title>회원정보수정</title>
 </head>
 <body class="vh-100">
-  
   <!-- 헤더 -->
   <?php require_once("view/inc/header.php"); ?>
-
+  
   <main class="d-flex justify-content-center align-items-center h-75">
-    <form style ="width: 400px" action="/user/regist" method="post">
-      <h1>회원 가입</h1>
+    <form style ="width: 400px" action="/user/edit" method="post">
+      <h1>회원 정보 수정</h1>
       <?php require_once("view/inc/errorMsg.php"); ?>
 
-      <label for="u_email" class="form-label">이메일</label>
-      <span id="print-chk-email"></span>
-      <button id="btn-chk-email" type="button" class="btn btn-secondary float-end mb-1">중복 확인</button>
-      <input type="text" class="form-control mb-3" id="u_email" name="u_email">
+      <label for="u_name" class="form-label">이름</label>
+      <input type="text" class="form-control mb-3" id="u_name" name="u_name" value=<?php echo $this->getCallUser("u_name"); ?>>
 
       <label for="u_pw" class="form-label">비밀번호</label>
       <input type="password" class="form-control mb-3" id="u_pw" name="u_pw">
 
-      <label for="u_name" class="form-label">이름</label>
-      <input type="text" class="form-control mb-3" id="u_name" name="u_name">
+      <label for="u_pw2" class="form-label">비밀번호 확인</label>
+      <input type="password" class="form-control mb-3" id="u_pw2" name="u_pw2">
 
-      <button id="my-btn-complete" type="submit" disable="disabled" class="btn btn-dark">완료</button>
+      <button id="my-btn-complete" type="submit" disable="disabled" class="btn btn-dark">수정</button>
       <a href="/user/login" class="btn btn-danger float-end">취소</a>
     </form>
   </main>

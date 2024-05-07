@@ -10,15 +10,17 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <!-- 색상변경 -->
       <div class="container-fluid">
         <a class="navbar-brand" href="#">미니보드</a>
+
         
         <!-- login 페이지에서는 햄버거 출력 X -->
         <?php
           if($_GET["url"] !== "user/login" && $_GET["url"] !== "user/regist") {
-        ?>
+            ?>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
@@ -39,6 +41,7 @@
                 </ul>
             </li>
           </ul>
+          <a href="/user/edit" class="navbar-nav nav-link text-light" role="button">회원정보 수정</a>
           <a href="/user/logout" class="navbar-nav nav-link text-light" role="button">로그아웃</a>
         </div>
 
