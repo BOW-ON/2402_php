@@ -35,7 +35,7 @@
       <label for="u_name" class="form-label">이름</label>
       <input type="text" class="form-control mb-3" id="u_name" name="u_name">
 
-      <button id="my-btn-complete" type="submit" disable="disabled" class="btn btn-dark">완료</button>
+      <button id="my-btn-complete" type="submit" disabled="disabled" class="btn btn-dark">완료</button>
       <a href="/user/login" class="btn btn-danger float-end">취소</a>
     </form>
   </main>

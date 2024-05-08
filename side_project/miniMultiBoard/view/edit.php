@@ -32,7 +32,7 @@
       <label for="u_pw2" class="form-label">비밀번호 확인</label>
       <input type="password" class="form-control mb-3" id="u_pw2" name="u_pw2">
 
-      <button id="my-btn-complete" type="submit" disable="disabled" class="btn btn-dark">수정</button>
+      <button id="my-btn-complete" type="submit" class="btn btn-dark">수정</button>
       <a href="/user/login" class="btn btn-danger float-end">취소</a>
     </form>
   </main>

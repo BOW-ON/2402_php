@@ -7,7 +7,7 @@ class UserValidator {
 
         // 패턴 생성
         $patternEmail = "/^[0-9a-zA-Z](?!.*?[\-\_\.]{2})[a-zA-Z0-9\-\_\.]{3,63}@[0-9a-zA-Z](?!.*?[\-\_\.]{2})[a-zA-Z0-9\-\_\.]{3,63}\.[a-zA-Z]{2,3}$/";
-        $patternPassword ="/^[a-zA-Z0-9!@]{8,20}$/";
+        $patternPassword = "/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[^\s]{8,20}$/";
         $patternName = "/^[가-힣]{1,50}$/u";
 
         // 이메일 체크
@@ -26,7 +26,7 @@ class UserValidator {
         // 패스워드 확인 체크
         if(array_key_exists("u_pw", $param_arr) && array_key_exists("u_pw2", $param_arr)){ // array_key_exists : 배열에 특정 키 유무 확인
             if($param_arr["u_pw"] !== $param_arr["u_pw2"]){
-                $arrErrorMsg[] = "pw와 pw2가 다릅니다.";
+                $arrErrorMsg[] = "새비밀번호와 비밀번호 확인이 다릅니다.";
             }
         }
         

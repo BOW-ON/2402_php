@@ -74,7 +74,7 @@ class UsersModel extends Model {
             $stmt->execute($paramArr);
             $result = $stmt->rowCount();
 
-            return count($result) > 0 ? $result[0] : $result;
+            return $result;
         } catch (\Throwable $th) {
             echo "UsersModel -> editUser(), ".$th->getMessage();
             exit;
@@ -99,7 +99,7 @@ class UsersModel extends Model {
             $stmt->execute($paramArr);
             $result = $stmt->fetchAll();
 
-            return $result;
+            return count($result) > 0 ? $result[0] : $result;
         } catch (\Throwable $th) {
             echo "UsersModel -> getUserInfo(), ".$th->getMessage();
             exit;

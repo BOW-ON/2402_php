@@ -2,17 +2,17 @@
 document.querySelector('#btn-chk-email').addEventListener('click', () => {
     const email = document.querySelector('#u_email').value;
     const url = '/user/email';
-
+    
     // 폼 데이터 생성
     const formData = new FormData();
     formData.append('u_email', email);
 
     axios.post(url, formData) // axios.post(url, data, config);  // JSON 타입으로 보낼경우 config를 받아야된다.
     .then(res => {
-        const errMsg = document.querySelector('#div-error-msg');
+        const errMsg = document.querySelector("#div-error-msg");
         const printChkEmail = document.querySelector('#print-chk-email');
         const btnComplete = document.querySelector('#my-btn-complete');
-        if(res.data.errorFlg){
+        if(res.data.errorFlg) {
             // 이메일 체크 실패 처리
             errMsg.innerHTML = res.data.errorMsg.join('<br>');
 
@@ -26,7 +26,7 @@ document.querySelector('#btn-chk-email').addEventListener('click', () => {
             printChkEmail.classList = 'text-success fw-bold';
             btnComplete.removeAttribute('disabled');
         }
-        console.log(res.data);
+        // console.log(res.data);
     })
     .catch(err => console.log(err));
 });

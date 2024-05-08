@@ -153,25 +153,29 @@ class UserController extends Controller {
         return base64_encode($pw.$email);
     }
 
-    // 회원정보 수정 페이지 이동
-    
-    private $calluser;
-    public function getCallUser($key){
+
+
+    // 회원정보 수정 페이지 이동(SESSION 사용 > getter 사용으로 변경)
+    private $callUser; // getter 사용하기 위해 변수 지정(배열로 타입설정, 값 초기화를 위해 = []을 추가해도 됨.)
+    // getter 사용 : 외부에서 원본 데이터 수정을 막으면서 외부에서 사용하기 위해서
+    public function getCallUser($key){ 
         return $this->callUser[$key];
     }
 
+    // 회원정보 수정 Get 처리
     protected function editGet(){
-        $requestData = [
+        $requestData2 = [
             "u_id" => $_SESSION["u_id"]
         ];
         $modelUsers = new UsersModel();
-        //$_SESSION['callUser'] = $modelUsers->callUser($requestData);
-        $this->callUser = $modelUsers->callUser($requestData);
-        
+        // 이름, 이메일 가져오기
+        //$_SESSION['callUser'] = $modelUsers->callUser($requestData2);
+        $this->callUser = $modelUsers->callUser($requestData2);
+
         return "edit.php";
     }
 
-    // 회원정보 수정 처리
+    // 회원정보 수정 Post 처리
     protected function editPost(){
         $modelUsers = new UsersModel();
 
@@ -205,7 +209,7 @@ class UserController extends Controller {
         ];
 
         // 비밀번호 암호화
-        $requestData["u_pw"] = $this->encryptionPassword($requestData["u_pw"], $requestData["u_email"]);
+        $requestData["u_pw"] = $this->encryptionPassword($requestData["u_pw"], $this->getCallUser("u_email"));
 
         // 회원 정보 수정 처리
         $modelUsers->beginTransaction();
