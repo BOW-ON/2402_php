@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 // Request 사용
 use Illuminate\Http\Request;
+// TestController 사용
+use App\Http\Controllers\TestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -114,11 +117,44 @@ Route::get('/send', function(){
 });
 
 
+// -------------------------
+// 컨트롤러 연결
+// -------------------------
+// 커맨드로 컨트롤러 생성 : php artisan make:controller 컨트롤러 명
+
+Route::get('/test', [TestController::class, 'index']);
+//TestController -> create() : get
+Route::get('/test/create', [TestController::class, 'create']);
+Route::get('/test/view', [TestController::class, 'view']);
+
+// 리소스 라우터
+use App\Http\Controllers\TaskController;
+Route::resource('task', TaskController::class);
+
+
+// -------------------------------
+// 블레이드 템플릿 연습용
+// -------------------------------
+use App\Http\Controllers\EduController;
+Route::get('edu', [EduController::class, 'index']);
+
+
+// -------------------------
+// DB관련 연습용
+// -------------------------
+use App\Http\Controllers\UserController;
+Route::get('/user', [UserController::class, 'eduUser']);
 
 
 
+
+
+
+
+// ---------------------------------------
 // 존재하지 않는 url을 보냈을때 라우터 정의
 //  >> 먼저 인식할수 있으므로 최하단에 두는 것이 좋음
+// ---------------------------------------
 Route::fallback(function() {
     return '없는 URL 입니다.';
 });
