@@ -16,6 +16,8 @@ return new class extends Migration
      *
      * @return void
      */
+
+     // 마이그레이션 실행할때 실행되는 파일
     public function up()
     {
         Schema::create('boards', function (Blueprint $table) {
@@ -34,6 +36,8 @@ return new class extends Migration
      *
      * @return void
      */
+
+    // 마이그레이션 롤백할때 실행되는 파일
     public function down()
     {
         Schema::dropIfExists('boards');
