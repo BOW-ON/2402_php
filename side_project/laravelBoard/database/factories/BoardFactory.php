@@ -21,11 +21,11 @@ class BoardFactory extends Factory
     {
         // 이미지 파일 배열
         $arrImg =[
-            '/public/img/d1.png'
-            ,'/public/img/f1.png'
-            ,'/public/img/g1.png'
-            ,'/public/img/o1.png'
-            ,'/public/img/o2.png'
+            '/img/d1.png'
+            ,'/img/f1.png'
+            ,'/img/h1.png'
+            ,'/img/o1.png'
+            ,'/img/o2.png'
         ];
         return [
             'user_id' => User::inRandomOrder()->first()->id // inRandomOrder() : 랜덤으로 정렬
