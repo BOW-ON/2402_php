@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Providers;
+
+use App\Models\BoardName;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+
+class MyViewProvider extends ServiceProvider
+{
+    // 프로바이더 생성 명령어
+    // php artisan make:provider 프로바이더명
+
+    // /**
+    //  * Register services.
+    //  *
+    //  * @return void
+    //  */
+    // public function register()
+    // {
+    //     // 
+    // }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // 모든 뷰에 게시판이름 테이블 정보를 전달하는 처리 ( * : 모든 정보를 얻기 위함)
+        View::composer('*', function($view) {
+            $result = BoardName::orderBy('type')->get();
+            $view->with('globalBoardNameInfo', $result);
+            // $view->with('globalBoardNameInfo', $result->toArray()); // toArray() : 배열 객체로 받기
+        });
+    }
+}

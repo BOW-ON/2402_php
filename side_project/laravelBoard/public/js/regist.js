@@ -1,32 +1,44 @@
 // email 검색후 axios 처리
-document.querySelector('#btn-chk-email').addEventListener('click', () => {
-    const email = document.querySelector('#u_email').value;
-    const url = '/user/email';
+document.querySelector('#btn-chk-email').addEventListener('click', chkEmailPassword);
+
+// async로 작성
+async function chkEmailPassword() {
     
-    // 폼 데이터 생성
-    const formData = new FormData();
-    formData.append('u_email', email);
+    try{
+        const email = document.querySelector('#email').value;
+        const password = document.querySelector('#password').value;
+        const password2 = document.querySelector('#password-chk').value;
 
-    axios.post(url, formData) // axios.post(url, data, config);  // JSON 타입으로 보낼경우 config를 받아야된다.
-    .then(res => {
-        const errMsg = document.querySelector("#div-error-msg");
-        const printChkEmail = document.querySelector('#print-chk-email');
+        const url = '/user/chk';
+    
+    
+        // 폼 데이터 생성
+        const form = new FormData();
+        form.append('email', email);
+    
+        // Ajax
+        const response = await axios.post(url, form);
+
         const btnComplete = document.querySelector('#my-btn-complete');
-        if(res.data.errorFlg) {
-            // 이메일 체크 실패 처리
-            errMsg.innerHTML = res.data.errorMsg.join('<br>');
-
-            printChkEmail.textContent = '사용 불가';
+        const printChkEmail = document.querySelector('#print-chk-email');
+        printChkEmail.innerHTML = '';
+        // 정상 처리
+        if(response.data.emailFlg) {
+            // 중복 이메일
+            printChkEmail.innerHTML = '사용불가';
             printChkEmail.classList = 'text-danger fw-bold';
             btnComplete.setAttribute('disabled', 'disabled');
         } else {
-            // 이메일 체크 정상 처리
-            errMsg.innerHTML = "";
-            printChkEmail.textContent = '사용 가능';
+            // 사용 가능 이메일
+            printChkEmail.innerHTML = '사용가능';
             printChkEmail.classList = 'text-success fw-bold';
             btnComplete.removeAttribute('disabled');
         }
-        // console.log(res.data);
-    })
-    .catch(err => console.log(err));
-});
+
+    } catch(err) {
+        console.log(err);
+        alert('회원가입 실패')
+    }
+
+}
+
