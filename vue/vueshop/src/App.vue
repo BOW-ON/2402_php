@@ -6,16 +6,56 @@
   <!-- props : 자식 컴포넌트에게 props 속성을 이용해서 데이터를 전달-->
   <HearderComponent :navList="navList" />
 
+  <!-- 컴포넌트 분리 -->
+  <!-- <div class="nav" >
+  <a v-for="item in navList" :key="item.navName" :href="item.navHref" >{{ item.navName }}</a>
+  </div> -->
+
 
   <!-- 상품 리스트 -->
-  <div v-for="item in products" :key="item.productName"> <!-- v-for="(값, 키) in 배열" :key="" : 반복문 -->
-    <h4 @click="myOpenModal(item)">{{ item.productName }}</h4>
-    <p>{{ item.price }}원</p>
+  <BoardList
+    :products = "products"
+    :price = "productPrices"
+    @myOpenModal ="myOpenModal"
+  >
+    <!-- slot : 자식쪽에서 <slot></slot> 부분에 전달하여 자식 컴포넌트에서 렌더링 -->
+    <h3>부모쪽에서 정의한 슬롯</h3>
+  </BoardList>
+
+  <!-- 컴포넌트 분리 -->
+  <!-- <div v-for="item in products" :key="item.productName"> -->
+    <!-- v-for="(값, 키) in 배열" :key="" : 반복문 -->
+    <!-- <h4 @click="myOpenModal(item)">{{ item.productName }}</h4> -->
+    <!-- <p>{{ item.price }}원</p> -->
     <!-- <button @click="refPrice += 100 ">가격증가</button> -->
-  </div>
+    <!-- <button @click="item.price += 100 ">가격증가</button> -->
+  <!-- </div> -->
+
+
 
   <!-- 모달 -->
-  <ModalDetail :product="product" :flgModal="flgModal"/>
+  <!-- 컨포넌트 이벤트 : 부모 @, 자식 $emit 이용 -->
+  <ModalDetail
+    :product="product"
+    :flgModal="flgModal"
+    @myCloseModal="myCloseModal"
+    />
+
+
+
+<!-- 
+  <div class="bg_black" v-if="flgModal"> 
+    v-if : 모달 출력 여부
+    <div class="bg_white">
+      <img :src=" product.img "> 
+      :속성 : 원래 속성명을 vue 문법으로 사용하고 싶을때 콜론(:)을 붙이고 {{ }}를 뺀다
+      <h4>{{ product.productName }}</h4>
+      <p>{{ product.productContent }}</p>
+      <p>{{ product.price }} 원</p>
+      <button @click= "flgModal = !flgModal">닫기</button>
+    </div>
+  </div> -->
+
 
 </template>
 
@@ -26,8 +66,9 @@
 // setup : 컴포넌트의 스크립트 부분을 더 간결하고 직관적으로 작성.(Composition API)
 //  vue 에서 Composition API, Option API 비교
 
-import { ref, reactive } from 'vue'; // vue에 있는 ref, reactive 함수 import 함
+import { ref, reactive, provide } from 'vue'; // vue에 있는 ref, reactive 함수 import 함
 import HearderComponent from './components/HeaderComponent.vue'; // 자식 컴포넌트 import 함
+import BoardList from './components/BoardList.vue'; // 자식 컴포넌트 import 함
 import ModalDetail from './components/ModalDetail.vue'; // 자식 컴포넌트 import 함
 
 // -----------------------------
@@ -62,17 +103,29 @@ const navList  = reactive([
 // -----------------------------
 const flgModal = ref(false); // 모달 표시용 플래그
 let product = reactive({});
-// let product = reactive({1:1, 2:2})
-// let product = products
 
 function myOpenModal(item) {
   flgModal.value = !flgModal.value;
   product = item;
-  // const item2 = ['수달',  1000,  '수달입니다.', require('@/assets/img/o1.png')]
-  // console.log(item2)
-  // console.log(item);
+
 }
 
+function myCloseModal() {
+  flgModal.value = !flgModal.value;
+}
+
+
+// Provide / Inject 연습 (ProvideTest.vue)
+const count = ref(0);
+
+function addCount() {
+  count.value++;
+}
+
+provide('test', {
+  count
+  ,addCount
+});
 
 </script>
 
