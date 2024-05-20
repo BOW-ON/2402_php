@@ -1,6 +1,13 @@
 /node_modules
 /public/hot
 /public/storage
+# 깃 허브 업로드시 용량을 위해 추가
+/public/css
+/public/img
+/public/js
+/public/profile
+/public/mix-manifest.json
+# ------------------
 /storage/*.key
 /vendor
 .env

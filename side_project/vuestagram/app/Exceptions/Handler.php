@@ -38,4 +38,12 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     * Excption 해들링 커스텀
+     */
+    public function render($request, Throwable $exception) {
+        
+        return response()->json(['code' => 'E99'], 500);
+    }
 }

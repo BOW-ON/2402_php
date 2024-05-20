@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Utils\MyUserValidate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // facade 작업
+        $this->app->bind('MyUserValidate', function() {
+            return new MyUserValidate();
+        });
     }
 
     /**

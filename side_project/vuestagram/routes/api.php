@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// 유저가 url을 보낼떄 /api를 포함해서 보낼 시 api.php에서 처리함
+//  so) 아래 url은 '/api/login 이라고 생각하면 됨
+Route::post('/login', [UserController::class, 'login']);
