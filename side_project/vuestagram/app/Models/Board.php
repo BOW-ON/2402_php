@@ -29,6 +29,13 @@ class Board extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function users() {
+        // Users와 Boards 테이블 관계 설정
+        // hasMany : 1대 다 관계에서 1
+        // belongsTo : 1대 다 관계에서 다
+        return $this->belongsTo(User::class);
+    }
 }
 
 

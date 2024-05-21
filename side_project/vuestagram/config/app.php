@@ -192,7 +192,10 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'MyUserValidate' => App\MyFacade\MyUserValidateFacade::class,
-        // providers/AppServiceProvider.php에서 이후 작업 진행
+        'MyToken' => App\MyFacade\MyTokenFacade::class,
+        'MyEncrypt' => App\MyFacade\MyEncryptFacade::class,
+
+        // Providers/AppServiceProvider.php에서 이후 작업 진행
         
     ])->toArray(),
 

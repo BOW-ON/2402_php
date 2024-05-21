@@ -7,6 +7,7 @@
     font-weight: 400;
     font-style: normal;
     font-size: 1.1rem;
+
 }
 
 body {
@@ -14,6 +15,7 @@ body {
     max-width: 800px;
     margin: auto;
     -ms-overflow-style: none;
+    background-color: rgb(155, 155, 155);
 }
 
 ::-webkit-scrollbar {
@@ -60,6 +62,7 @@ a:hover {
 }
 .btn-header {
     width: 80px;
+    margin-left: 0.2rem;
 }
 .btn-close {
     width: 60px;

@@ -58,4 +58,11 @@ class User extends Authenticatable
     public function getGenderAttribute($value) {
         return $value === '0' ? '남자' : '여자';
     }
+
+    public function boards() {
+        // Users와 Boards 테이블 관계 설정
+        // hasMany : 1대 다 관계에서 1
+        // belongsTo : 1대 다 관계에서 다
+        return $this->hasMany(Board::class);
+    }
 }
