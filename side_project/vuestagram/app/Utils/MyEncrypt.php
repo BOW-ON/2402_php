@@ -3,6 +3,9 @@ namespace App\Utils;
 
 use Illuminate\Support\Str;
 
+// MyFacade에 등록을 해야 파사드로 사용가능
+
+
 class MyEncrypt {
     /**
      * base64 URL 인코드
@@ -47,6 +50,18 @@ class MyEncrypt {
      */
     public function makeSalt($saltLength) {
         return Str::random($saltLength);
+    }
+
+    /**
+     * 특정 길이의 솔트를 제거한 문자열 반환 
+     * 
+     * @param string $signature 시그니처
+     * @param int $saltLength 솔트의 길이
+     * 
+     * @return string 솔트길이만큼 제거한 값 반환
+     */
+    public function subSalt(string $signature, string $saltLength) {
+        return mb_substr($signature, 0, (-1 * $saltLength));
     }
 
 }
