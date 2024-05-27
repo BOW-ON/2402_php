@@ -50,7 +50,6 @@ const routes = [
     {
         path: '/userRegist',
         component: UserRegistComponent,
-        // beforeEnter: chkAuth,
     },
 ];
 

@@ -19,7 +19,7 @@
     <input @change="setFile" type="file" name="img" id="btn-img" accept="image/*">
     <span v-if="userRegist.profile">{{ userRegist.profile.name }}</span>
     <hr>
-    <button @click="$store.dispatch('userRegist', userRegist)" class="btn btn-submit btn-bg-black">가입 완료</button>
+    <button @click="$store.dispatch('userStoreRegist', userRegist)" class="btn btn-submit btn-bg-black">가입 완료</button>
     <button @click="$router.back()" class="btn btn-submit">취소</button>
   </div>
 </template>

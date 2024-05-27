@@ -10,7 +10,7 @@ const store = createStore({
             boardList: [],
             lastID: localStorage.getItem('lastID') ? localStorage.getItem('lastID') : 0,
             noMoreBoardListFlg: false,
-            // userRegist: localStorage.getItem('userRegist') ? localStorage.getItem('userRegist') : {},
+            userRegist: [],
         }
     },
     mutations: {
@@ -101,13 +101,13 @@ const store = createStore({
             }
             axios.post(url, null, config)
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 alert('로그아웃 완료');
 
             })
             .catch(error => {
-                console.log(error);
-                console.log(error.response);
+                // console.log(error);
+                // console.log(error.response);
                 alert('문제가 발생하여 로그아웃 처리')
             })
             .finally(() => {
@@ -128,8 +128,9 @@ const store = createStore({
          * @param {*} context
          * @param {*} userRegist
          */
-        userRegist(context, userRegist){
-            console.log(userRegist);
+        userStoreRegist(context, userRegist){
+            console.log(userRegist.profileURL);
+            console.log(userRegist.profile);
             console.log(JSON.stringify(userRegist));
 
             // 회원가입 작성 ajax 처리
@@ -144,15 +145,21 @@ const store = createStore({
             data.append('password', userRegist.password);
             data.append('name', userRegist.name);
             data.append('gender', userRegist.gender);
+
+            // TODO : profileURL, profile 인지 확인
             if (userRegist.profile) {
                 data.append('profile', userRegist.profile);
             }
 
-
             axios.post(url, data, config)
             .then(response => {
-                console.log(response.data);
-                router.replace('/login');
+                // console.log(response);
+                // console.log(userRegist)
+
+                // 유효성검사
+                // console.log(context.state.userRegist);
+
+                // router.replace('/login');
             })
             .catch(error => {
                 console.error(error.response);
