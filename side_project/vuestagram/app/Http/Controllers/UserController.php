@@ -52,10 +52,11 @@ class UserController extends Controller
             throw new MyAuthException('E21');
         }
 
-        // 토근 발행
+        // 토큰 발행
         list($accessToken, $refreshToken) = MyToken::createTokens($resultUserInfo);
+        Log::debug('토큰 발행 완료');
 
-        // 리프레시 토큰 저장
+        // 리프래시 토큰 저장
         MyToken::updateRefreshToken($resultUserInfo, $refreshToken);
 
         // response Data
@@ -90,4 +91,57 @@ class UserController extends Controller
 
         return response()->json($responseData, 200);
     }
+
+    /**
+     * 토큰 재발급
+     * 
+     * @param Illuminate\Http\Request $request
+     * 
+     * @return response() json
+     */
+
+    public function reissue(Request $request) {
+        Log::debug('**************** 토큰 재발급 시작 ********************');
+        // 유저 PK 획득
+        $id = MyToken::getValueInPayload($request->bearerToken(), 'idt');
+        Log::debug('베어럴 토큰 : '.$request->bearerToken());
+        Log::debug('유저PK : '.$id);
+
+        // 유저 정보 획득
+        $resultUserInfo = User::find($id);
+        Log::debug('유저 정보 : ', $resultUserInfo->toArray());
+
+        // 유효한 유저 확인
+        if(!isset($resultUserInfo)) {
+            throw new MyAuthException('E20');
+        }
+
+        // 리프래시 토큰 체크
+        if($request->bearerToken() !== $resultUserInfo->refresh_token) {
+            throw new MyAuthException('E23');
+        }
+        Log::debug('리프래시 토큰 체크 완료');
+       
+        // 토큰 발행
+        list($accessToken, $refreshToken) = MyToken::createTokens($resultUserInfo);
+        Log::debug('토큰 발행 완료');
+
+        // 리프래시 토큰 저장
+        MyToken::updateRefreshToken($resultUserInfo, $refreshToken);
+        Log::debug('토큰 저장 완료');
+        
+        // response Data
+        $responseData = [
+            'code' => '0'
+            ,'msg' => '인증 완료'
+            ,'accessToken' => $accessToken
+            ,'refreshToken' => $refreshToken
+            ,'data' => $resultUserInfo
+        ];
+        
+        Log::debug('**************** 토큰 재발급 완료 ********************');
+
+        return response()->json($responseData, 200);
+    }
+
 }

@@ -1,7 +1,6 @@
 import { createStore } from 'vuex';
 import axios from './axios';
 import router from './router';
-import { flatMap } from 'lodash';
 
 const store = createStore({
     state(){
@@ -11,6 +10,7 @@ const store = createStore({
             boardList: [],
             lastID: localStorage.getItem('lastID') ? localStorage.getItem('lastID') : 0,
             noMoreBoardListFlg: false,
+            // userRegist: localStorage.getItem('userRegist') ? localStorage.getItem('userRegist') : {},
         }
     },
     mutations: {
@@ -30,6 +30,9 @@ const store = createStore({
         },
         setUserBoardCount(state) {
             state.userInfo.boards_count++;
+        },
+        setUserRegist(state, userRegist) {
+            state.userRegist = userRegist;
         },
 
         // -----------------
@@ -119,6 +122,45 @@ const store = createStore({
                 router.replace('/login');
             });
         },
+        /**
+         * 회원 가입 처리
+         * 
+         * @param {*} context
+         * @param {*} userRegist
+         */
+        userRegist(context, userRegist){
+            console.log(userRegist);
+            console.log(JSON.stringify(userRegist));
+
+            // 회원가입 작성 ajax 처리
+            const url = '/api/userRegist/';
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            }
+            const data = new FormData();
+            data.append('account', userRegist.account);
+            data.append('password', userRegist.password);
+            data.append('name', userRegist.name);
+            data.append('gender', userRegist.gender);
+            if (userRegist.profile) {
+                data.append('profile', userRegist.profile);
+            }
+
+
+            axios.post(url, data, config)
+            .then(response => {
+                console.log(response.data);
+                router.replace('/login');
+            })
+            .catch(error => {
+                console.error(error.response);
+                const errorCode = error.response.data.code ? error.response.data.data : 'FE99';
+                alert('회원가입 실패 : ' + errorCode);
+            })
+        },
+
 
         /**
          * 보드 리스트 정보 획득
@@ -205,39 +247,113 @@ const store = createStore({
          * 
          */
         storeBoard(context, boardInfo) {
-            const url = '/api/board/';
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+            // 토큰 만료 체크
+            const payload = localStorage.getItem('accessToken').split('.')[1]; // accesToken에서 payload 부분만 획득
+            const base64Payload = payload.replaceAll('-', '+').replaceAll('_', '/');
+            const objPayload = JSON.parse(window.atob(base64Payload));
+            // console.log(objPayload.exp); // 토큰 만료 시간 확인하기
+
+            const exp = objPayload.exp + '000'; // 토큰 만료시간 획득 (밀리세컨드가 포함되기 때문에 비교하기 위해 000을 추가)
+            const now = new Date(); // 현재 시간
+
+            if(exp < now.getTime()) {
+                console.log('토큰 만료');
+                // 토큰 재발급
+                const url = '/api/reissue';
+                const config = {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('refreshToken'),
+                    }
                 }
-            }
-            const data = new FormData();
-            data.append('content', boardInfo.content);
-            data.append('img', boardInfo.img);
+
+                // axios 처리
+                axios.post(url, null, config)
+                .then(response => {
+                    // 토큰 저장
+                    localStorage.setItem('accessToken', response.data.accessToken);
+                    localStorage.setItem('refreshToken', response.data.refreshToken);
+                    
+                    // 게시글 작성 ajax 처리
+                    const url = '/api/board/';
+                    const config = {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                        }
+                    }
+                    const data = new FormData();
+                    data.append('content', boardInfo.content);
+                    data.append('img', boardInfo.img);
+                
+                    // axios 처리
+                    axios.post(url, data, config)
+                    .then(response => {
+                        if(context.state.boardList.length > 1) {
+                            // 보드리스트의 가장 앞에 작성한 글정보 추가
+                            context.commit('setUnshiftBoardList', response.data.data);
+                        }
         
-            // axios 처리
-            axios.post(url, data, config)
-            .then(response => {
-                if(context.state.boardList.length > 1) {
-                    // 보드리스트의 가장 앞에 작성한 글정보 추가
-                    context.commit('serUnshiftBoardList', response.data.data);
+                        // 유저의 작성글 수 1 증가
+                        context.commit('setUserBoardCount');
+                        localStorage.setItem('userInfo', JSON.stringify(context.state.userInfo));
+        
+                        // 게시글 인덱스로 이동
+                        router.replace('/board');
+        
+                    })
+                    .catch(error => {
+                        // console.log(error);
+                        // console.log(error.response);
+                        const code = error.response ? error.response.data.code : '';
+                        alert('게시글 작성에 실패했습니다. (' + code + ')')
+                    });
+
+                })
+                .catch(error => {
+                    // console.log(error);
+                    // console.log(error.response);
+                    const code = error.response ? error.response.data.code : '';
+                    alert('게시글 작성에 실패했습니다. (' + code + ')')
+                });
+
+            } else {
+                console.log('토큰 유효');
+
+                // 게시글 작성 ajax 처리
+                const url = '/api/board/';
+                const config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                    }
                 }
-
-                // 유저의 작성글 수 1 증가
-                context.commit('setUserBoardCount');
-                localStorage.setItem('userInfo', JSON.stringify(context.state.userInfo));
-
-                // 게시글 인덱스로 이동
-                router.replace('/board');
-
-            })
-            .catch(error => {
-                // console.log(error);
-                // console.log(error.response);
-                const code = error.response ? error.response.data.code : '';
-                alert('게시글 작성에 실패했습니다. (' + code + ')')
-            });
+                const data = new FormData();
+                data.append('content', boardInfo.content);
+                data.append('img', boardInfo.img);
+            
+                // axios 처리
+                axios.post(url, data, config)
+                .then(response => {
+                    if(context.state.boardList.length > 1) {
+                        // 보드리스트의 가장 앞에 작성한 글정보 추가
+                        context.commit('setUnshiftBoardList', response.data.data);
+                    }
+    
+                    // 유저의 작성글 수 1 증가
+                    context.commit('setUserBoardCount');
+                    localStorage.setItem('userInfo', JSON.stringify(context.state.userInfo));
+    
+                    // 게시글 인덱스로 이동
+                    router.replace('/board');
+    
+                })
+                .catch(error => {
+                    // console.log(error);
+                    // console.log(error.response);
+                    const code = error.response ? error.response.data.code : '';
+                    alert('게시글 작성에 실패했습니다. (' + code + ')')
+                });
+            }
         }
     }
 })

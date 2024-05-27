@@ -13,7 +13,7 @@ use PDOException;
 
 class MyToken {
     /**
-     * 액세스 토큰과 리프레시 토큰 생성
+     * 액세스 토큰과 리프래시 토큰 생성
      * 
      * @param   App\Models\User $UserInfo
      * @return  Array [$accessToken, $refreshToken]
@@ -195,7 +195,7 @@ class MyToken {
     }
 
     /**
-     * DB에 저장된 리프레시 토큰 삭제
+     * DB에 저장된 리프래시 토큰 삭제
      * 
      * @param App\Model\User $userInfo 대상유저 모델 객체
      * 
