@@ -129,9 +129,7 @@ const store = createStore({
          * @param {*} userRegist
          */
         userStoreRegist(context, userRegist){
-            console.log(userRegist.profileURL);
-            console.log(userRegist.profile);
-            console.log(JSON.stringify(userRegist));
+            // console.log(JSON.stringify(userRegist));
 
             // 회원가입 작성 ajax 처리
             const url = '/api/userRegist/';
@@ -145,27 +143,22 @@ const store = createStore({
             data.append('password', userRegist.password);
             data.append('name', userRegist.name);
             data.append('gender', userRegist.gender);
-
-            // TODO : profileURL, profile 인지 확인
-            if (userRegist.profile) {
-                data.append('profile', userRegist.profile);
+            if (userRegist.img) {
+                data.append('img', userRegist.img);
             }
 
             axios.post(url, data, config)
             .then(response => {
-                // console.log(response);
-                // console.log(userRegist)
+                console.log(response.data);
 
-                // 유효성검사
-                // console.log(context.state.userRegist);
-
-                // router.replace('/login');
+                router.replace('/login');
             })
             .catch(error => {
                 console.error(error.response);
-                const errorCode = error.response.data.code ? error.response.data.data : 'FE99';
-                alert('회원가입 실패 : ' + errorCode);
+                const code = error.response ? error.response.data.code : '';
+                alert('회원 가입에 실패했습니다. (' + code + ')')
             })
+
         },
 
 

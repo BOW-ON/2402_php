@@ -17,7 +17,7 @@
     </div>
     <label for="btn-img" class="btn btn-file">프로필 파일 선택</label>
     <input @change="setFile" type="file" name="img" id="btn-img" accept="image/*">
-    <span v-if="userRegist.profile">{{ userRegist.profile.name }}</span>
+    <span v-if="userRegist.img">{{ userRegist.img.name }}</span>
     <hr>
     <button @click="$store.dispatch('userStoreRegist', userRegist)" class="btn btn-submit btn-bg-black">가입 완료</button>
     <button @click="$router.back()" class="btn btn-submit">취소</button>
@@ -32,7 +32,7 @@ const userRegist = reactive({
   password: '',
   name: '',
   gender:'',
-  profile: null,
+  img: null,
   profileURL: '',
 });
 
@@ -40,8 +40,8 @@ const userRegist = reactive({
 function setFile(e) {
   const file = e.target.files[0];
   if (file) {
-    userRegist.profile = file;
-    userRegist.profileURL = URL.createObjectURL(userRegist.profile);
+    userRegist.img = file;
+    userRegist.profileURL = URL.createObjectURL(userRegist.img);
   }
 }
 
