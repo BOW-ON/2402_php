@@ -15,7 +15,8 @@ class BoardController extends Controller
     public function index() {
         $boardData = Board::select('boards.*', 'users.name')
                         ->join('users', 'users.id', '=', 'boards.user_id')
-                        ->orderBy('id','DESC')
+                        // ->where('boards.user_id', '=', Auth::id())
+                        ->orderBy('boards.id','DESC')
                         ->limit(20)
                         ->get();
 
@@ -76,10 +77,10 @@ class BoardController extends Controller
         // // 이미지 파일 저장
         // $path = $request->file('img')->store('img');
         // // 인서트 처리
-        $boardModel = Board::select('boards.*', 'users.name')
-                                ->join('users', 'users.id', '=', 'boards.id')
-                                ->where('user.id', Auth::id())
-                                ->first();
+        // $boardModel = Board::select('boards.*', 'users.name')
+        //                         ->join('users', 'users.id', '=', 'boards.id')
+        //                         ->where('user.id', Auth::id())
+        //                         ->first();
         // $boardModel->content = $request->content;
         // $boardModel->img = $path;
         // $boardModel->user_id = Auth::id();

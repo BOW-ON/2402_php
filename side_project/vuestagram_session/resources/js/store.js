@@ -121,6 +121,9 @@ const store = createStore({
                 context.commit('setAuthFlg', false);
                 context.commit('setUserInfo', null); 
 
+                // 보드 초기화
+                context.commit('setBoardData', []);
+
                 // 라우터를 이용하여 로그아웃 처리 후 login 페이지로 이동
                 router.replace('/login');
             });
