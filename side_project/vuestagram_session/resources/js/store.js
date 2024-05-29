@@ -31,6 +31,7 @@ const store = createStore({
             state.userInfo = userInfo;
         },
 
+
         // 게시글 초기 삽입
         setBoardData(state, data) {
             state.boardData = data;
@@ -45,7 +46,17 @@ const store = createStore({
         setMoreBoardData(state, data) {
             // 기존 습득했던 데이터와 더보기로 습득한 데이터를 합치기 (... 이용)
             state.boardData = [...state.boardData, ...data];
-        }
+        },
+
+        // 게시글 삽입
+        // 보드리스트의 가장 앞에 작성한 글정보 추가
+        setUnshiftBoardData(state, data) {
+            state.boardData.unshift(data);
+        },
+        // 유저의 작성글 수 1 증가
+        setUserBoardCount(state) {
+            state.userInfo.boards_count++;
+        },
     },
     actions: {
 
@@ -172,6 +183,57 @@ const store = createStore({
             });
 
         },
+
+        /**
+         * 회원가입 처리
+         * 
+         * @param {*} context
+         */
+        registration(context) {
+            const url = '/api/registration';
+            const data = new FormData(document.querySelector('#registrationForm'));
+
+            axios.post(url, data)
+            .then(response => {
+                console.log(response.data); // TODO
+
+                router.replace('/login');
+            })
+            .catch(error => {
+                console.log(error.response); // TODO
+                alert('회원가입에 실패했습니다. (' + error.response.data.code + ')')
+            });
+        },
+
+        /**
+         * 글작성 처리
+         * 
+         * @param {*} context
+         */
+        boardCreate(context) {
+            const url = '/api/create';
+            const data = new FormData(document.querySelector('#boardCreateForm'));
+
+            axios.post(url, data)
+            .then(response => {
+                console.log(response.data); // TODO
+
+                if(context.state.boardData.length > 1) {
+                    // 보드데이터의 가장 앞에 작성한 글정보 추가
+                    context.commit('setUnshiftBoardData', response.data.data);
+                }
+
+                // 유저의 작성글 수 1 증가
+                context.commit('setUserBoardCount');
+                localStorage.setItem('userInfo', JSON.stringify(context.state.userInfo));
+
+                router.replace('/board');
+            })
+            .catch(error => {
+                console.log(error.response); // TODO
+                alert('글 작성에 실패했습니다. (' + error.response.data.code + ')')
+            });
+        }
 
     }
 });

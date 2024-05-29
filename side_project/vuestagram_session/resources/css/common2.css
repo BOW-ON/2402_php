@@ -1,13 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Pen+Script&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Nanum Brush Script", cursive;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1.1rem;
-
 }
 
 body {
@@ -15,7 +9,6 @@ body {
     max-width: 800px;
     margin: auto;
     -ms-overflow-style: none;
-    background-color: rgb(155, 155, 155);
 }
 
 ::-webkit-scrollbar {
@@ -27,7 +20,7 @@ hr {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 /* a Tag */
@@ -62,9 +55,8 @@ a:hover {
 }
 .btn-header {
     width: 80px;
-    margin-left: 0.2rem;
 }
-.btn-close .btn-delete {
+.btn-close {
     width: 60px;
 }
 .btn-bg-black {
@@ -75,31 +67,10 @@ a:hover {
     color: #000;
     background-color: #fff;
 }
-.btn-bg-red {
-    color: #fff;
-    background-color: red;
-}
-.btn-fixed {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    padding: 0 1rem;
-    font-weight: bold;
-}
-#btn-img {
-    display: none;
-}
-.btn-file {
-    font-weight: bold;
-    border: 1px solid black;
-    background-color: transparent;
-    cursor: pointer;
-}
 .btn-more {
     margin-top: 20px;
     width: 100%;
 }
-
 
 /* Form */
 .form-box {
@@ -157,14 +128,14 @@ header {
     display: flex;
     align-items: center;
 }
-/* .header-container{
+.eader-container{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     max-width: 1000px;
     padding: 10px 20px;
-} */
+}
 .header-content {
     display: flex;
     justify-content: space-between;

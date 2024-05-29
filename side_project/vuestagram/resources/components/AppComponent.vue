@@ -9,11 +9,11 @@
         <img class="img-logo" src="/logo.png">
         <div class="btn-group">
           <div v-if="!$store.state.authFlg">
-            <router-link v-if="route.path === '/login'" to="/userRegist">
-              <button class="btn btn-header btn-bg-white">회원가입</button>
-            </router-link>
-            <router-link v-else-if="route.path === '/userRegist'" to="/login">
+            <router-link v-if="route.path === '/userRegist'" to="/login">
               <button class="btn btn-header btn-bg-black">로그인</button>
+            </router-link>
+            <router-link v-else-if="route.path === '/login'" to="/userRegist">
+              <button class="btn btn-header btn-bg-white">회원가입</button>
             </router-link>
           </div>
 

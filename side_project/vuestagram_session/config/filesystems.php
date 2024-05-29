@@ -29,12 +29,13 @@ return [
     */
 
     'disks' => [
-
+        // 내부
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            // 'root' => storage_path('app'),
+            'root' => public_path(),
         ],
-
+        // 외부
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

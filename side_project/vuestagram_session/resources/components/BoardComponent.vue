@@ -1,5 +1,5 @@
 <template>
-  <!-- 상세 -->
+  <!-- 상세 모달 -->
   <div v-if="detailFlg" class="board-detail-box">
     <div class="item">
       <img :src="detailItem.img">
@@ -8,7 +8,10 @@
       <hr>
       <div class="etc-box">
         <span>작성자 : {{ detailItem.name }}</span>
-        <button @click="closeDetail()" class="btn btn-bg-black btn-close">닫기</button>
+        <div>
+          <button @click="closeDetail()" class="btn btn-bg-black btn-delete">삭제</button>
+          <button @click="closeDetail()" class="btn btn-bg-red btn-close">닫기</button>
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +24,7 @@
   </div>
   <!-- v-if="$store.state.moreBoardFlg" : 습득할 데이터가 없으면 더보기 버튼 없애기 위해 작성 -->
   <button v-if="$store.state.moreBoardFlg" @click="$store.dispatch('getMoreBoardData')" class="btn btn-bg-black btn-more" type="button">더보기</button>
+  <a href="#" class="btn btn-bg-white btn-fixed">TOP</a>
 
 </template>
 <script setup>

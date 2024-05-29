@@ -6,6 +6,7 @@ const axiosInstance = axios.create({
 
     // 기본 헤더 설정
     headers: {
+        // 기본 값 : 'Content-Type': 'multipart/form-data',
         'Content-Type': 'application/json',
     }
 });

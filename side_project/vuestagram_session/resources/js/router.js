@@ -13,6 +13,7 @@ const routes = [
         {
             path: '/login',
             component: LoginComponent,
+            beforeEnter: chkAuthReturn, // 
         },
         {
             path: '/board',
@@ -38,6 +39,17 @@ function chkAuth(to, from, next) {
         alert('로그인이 필요한 서비스 입니다.');
         next('/login'); // 로그인 페이지로 이동
     }
+}
+
+// 로그인 상태에서 로그인 페이지로 가면 board로 이동
+function chkAuthReturn(to, from, next) {
+    if(to.path === '/login' && store.state.authFlg) {
+        if(from.path === '/') {
+            next('board');
+        }
+        next(from.path);
+    }
+    next();
 }
 
 

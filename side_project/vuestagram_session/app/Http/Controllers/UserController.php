@@ -69,7 +69,7 @@ class UserController extends Controller
             ,'msg' => '로그인 성공'
             ,'data' => $userInfo
         ];
-        return response()->json($responseData, 200)->cookie('auth', '1', 12000, null, null, false, false);
+        return response()->json($responseData, 200)->cookie('auth', '1', 120, null, null, false, false);
         // cookie(키, 값, 유지 시간, 패스(어떤경로에서 쓰일건가), 도메인, 시큐리티, HTTP: 프론트에서 읽을 수 있냐 없냐 차이 - false면 읽을 수 있음, true는 못 읽음 )
     }
 
@@ -91,4 +91,57 @@ class UserController extends Controller
         return response()->json($responseData, 200)->cookie('auth', '1', -1, null, null, false, false);
         // 쿠키는 유저 브라우저에 있으므로 제거를 직접적으로 할 수 없음 > 유지시간을 -1초로 변경하여 삭제 처리
     }
+
+    // ** 회원 가입 **
+    public function registration(Request $request) {
+        // 리퀘스트 데이터 획득
+        $requestData = $request->all();
+
+        // 유효성 검사
+        $validator = Validator::make(
+            $requestData
+            ,[
+                'account' => ['unique:users', 'required' ,'min:4', 'max:20', 'regex:/^[a-zA-z0-9]+$/']
+                    // 'unique:users' : users 테이블에서 중복 확인
+                ,'password' => ['required' ,'min:2', 'max:20', 'regex:/^[a-zA-z0-9!@#$%^&*]+$/']
+                ,'password_chk' => ['same:password']
+                    // 'same:password' : password 와 동일한지 파악
+                ,'name' => ['required' ,'min:2', 'max:20', 'regex:/^[가-힣]+$/u']
+                    // 'regex:/^[가-힣]+$/u' : 컴퓨터가 글자를 숫자로 변환해서 인식하는데 각각 다른 숫자로 변환하기때문에 u(유니코드)로 통일
+                ,'gender' => ['required', 'regex:/^[0-1]{1}$/']
+                ,'profile' => ['required', 'image'] 
+                    // image : 이미지를 저장할 수 있음 (특정 이미지 확장자만 사용가능함)
+            ]
+        );
+
+        // 유효성 검사 실패 체크
+        if($validator->fails()) {
+            Log::debug('유효성 검사 실패', $validator->errors()->toArray());
+            throw new MyValidateException('E01');
+        }
+
+        // 작성 데이터 생성
+        $insertData = $request->all();
+
+        // 파일 저장
+        //  >> 기본 저장이 store에 저장됨 so) config/filesystems.php 에서 경로 수정
+        $insertData['profile'] = $request->file('profile')->store('profile');
+        // 파일 명을 문자열로 보내옴
+
+        // 비밀번호 설정
+        $insertData['password'] = Hash::make($request->password);
+
+        // 인서트 처리
+        $userInfo = User::create($insertData);
+
+        // 레스폰스 데이터 생성
+        $responseData = [
+            'code' => '0'
+            ,'msg' => '회원 가입 완료'
+            ,'data' => $userInfo
+        ];
+
+        return response()->json($responseData, 200);
+    }
+
 }
