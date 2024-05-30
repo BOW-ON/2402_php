@@ -16,8 +16,9 @@
       </div>
     </div>
     <label for="btn-img" class="btn btn-file">프로필 파일 선택</label>
-    <input type="file" name="profile" id="btn-img" accept="image/*">
+    <input @change="setFile" type="file" name="profile" id="btn-img" accept="image/*">
     <span v-if="userRegist.img">{{ userRegist.img.name }}</span>
+    <img :src="preview">
     <hr>
     <button @click="$store.dispatch('registration')" type="button" class="btn btn-submit btn-bg-black">가입 완료</button>
     <button @click="$router.back()" type="button" class="btn btn-submit">취소</button>
@@ -25,12 +26,21 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
 
 const userRegist = reactive({
   img: null,
 });
+const preview = ref('');
+
+function setFile(e) {
+  const file = e.target.files[0];
+  if (file) {
+    userRegist.img = file;
+    preview.value = URL.createObjectURL(userRegist.img);
+  }
+}
 
 </script>
 

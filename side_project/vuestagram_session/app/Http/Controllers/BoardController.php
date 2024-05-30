@@ -15,7 +15,7 @@ class BoardController extends Controller
     public function index() {
         $boardData = Board::select('boards.*', 'users.name')
                         ->join('users', 'users.id', '=', 'boards.user_id')
-                        // ->where('boards.user_id', '=', Auth::id())
+                        // ->where('boards.user_id', '=', Auth::id()) // 로그인한 유저의 데이터만 가져오고 싶을 경우 where 처리
                         ->orderBy('boards.id','DESC')
                         ->limit(20)
                         ->get();

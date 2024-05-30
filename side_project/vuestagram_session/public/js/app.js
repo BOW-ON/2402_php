@@ -20976,6 +20976,7 @@ __webpack_require__.r(__webpack_exports__);
     // 게시글 습득 관련
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(function () {
       // 다른페이지 갔다가 다시 돌아오면 서버에 게시글 획득 재요청을 방지하기 위해 if로 특정 상황일때만 요청하기
+      // router.path == '/board' : board 경로가 있을 경우
       if (store.state.boardData.length < 1 && router.path == '/board') {
         store.dispatch('getBoardData');
       }
@@ -21081,9 +21082,20 @@ __webpack_require__.r(__webpack_exports__);
     var userRegist = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       img: null
     });
+    var preview = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+    function setFile(e) {
+      var file = e.target.files[0];
+      if (file) {
+        userRegist.img = file;
+        preview.value = URL.createObjectURL(userRegist.img);
+      }
+    }
     var __returned__ = {
       userRegist: userRegist,
-      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive
+      preview: preview,
+      setFile: setFile,
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -21218,29 +21230,32 @@ var _hoisted_8 = {
   "class": "etc-box"
 };
 var _hoisted_9 = {
+  "class": "etc-box-btn"
+};
+var _hoisted_10 = {
   "class": "board-list-box"
 };
-var _hoisted_10 = ["onClick"];
-var _hoisted_11 = ["src"];
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_11 = ["onClick"];
+var _hoisted_12 = ["src"];
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "#",
   "class": "btn btn-bg-white btn-fixed"
 }, "TOP", -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 상세 모달 "), $setup.detailFlg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: $setup.detailItem.img
-  }, null, 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "좋아요 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.like), 1 /* TEXT */), _hoisted_5]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.content), 1 /* TEXT */), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "작성자 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_ctx.$store.state.userInfo.id === $setup.detailItem.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, null, 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "좋아요 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.like), 1 /* TEXT */), _hoisted_5]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.content), 1 /* TEXT */), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "작성자 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_ctx.$store.state.userInfo.id === $setup.detailItem.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.$store.dispatch('boardDelete', $setup.detailItem.id), $setup.closeDetail();
     }),
-    "class": "btn btn-bg-black btn-delete"
+    "class": "btn btn-bg-black btn-delete btn-margin"
   }, "삭제")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.closeDetail();
     }),
-    "class": "btn btn-bg-red btn-close"
-  }, "닫기")])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 리스트 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.$store.state.boardData, function (item, key) {
+    "class": "btn btn-bg-red btn-close btn-margin"
+  }, "닫기")])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 리스트 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.$store.state.boardData, function (item, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       onClick: function onClick($event) {
         return $setup.openDetail(item);
@@ -21249,7 +21264,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "item"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: item.img
-    }, null, 8 /* PROPS */, _hoisted_11)], 8 /* PROPS */, _hoisted_10);
+    }, null, 8 /* PROPS */, _hoisted_12)], 8 /* PROPS */, _hoisted_11);
   }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-if=\"$store.state.moreBoardFlg\" : 습득할 데이터가 없으면 더보기 버튼 없애기 위해 작성 "), _ctx.$store.state.moreBoardFlg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     onClick: _cache[2] || (_cache[2] = function ($event) {
@@ -21257,7 +21272,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "class": "btn btn-bg-black btn-more",
     type: "button"
-  }, "더보기")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_12], 64 /* STABLE_FRAGMENT */);
+  }, "더보기")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_13], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -21406,13 +21421,22 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   placeholder: "이름",
   autoComplete: "off"
 }, null, -1 /* HOISTED */);
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"radio-box\"><div><label for=\"male\">남자</label><input type=\"radio\" name=\"gender\" id=\"male\" value=\"0\"></div><div><label for=\"female\">여자</label><input type=\"radio\" name=\"gender\" id=\"female\" value=\"1\"></div></div><label for=\"btn-img\" class=\"btn btn-file\">프로필 파일 선택</label><input type=\"file\" name=\"profile\" id=\"btn-img\" accept=\"image/*\">", 3);
-var _hoisted_10 = {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"radio-box\"><div><label for=\"male\">남자</label><input type=\"radio\" name=\"gender\" id=\"male\" value=\"0\"></div><div><label for=\"female\">여자</label><input type=\"radio\" name=\"gender\" id=\"female\" value=\"1\"></div></div><label for=\"btn-img\" class=\"btn btn-file\">프로필 파일 선택</label>", 2);
+var _hoisted_9 = {
   key: 0
 };
+var _hoisted_10 = ["src"];
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6, _hoisted_7, $setup.userRegist.img ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.userRegist.img.name), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    onChange: $setup.setFile,
+    type: "file",
+    name: "profile",
+    id: "btn-img",
+    accept: "image/*"
+  }, null, 32 /* NEED_HYDRATION */), $setup.userRegist.img ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.userRegist.img.name), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $setup.preview
+  }, null, 8 /* PROPS */, _hoisted_10), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.$store.dispatch('registration');
     }),
@@ -21599,8 +21623,10 @@ function chkAuthReturn(to, from, next) {
   }
   next();
 }
+
+// 해당 아이디를 받을 경우에만 처리
 function accountIndex(to, from, next) {
-  var account = to.params.account;
+  var account = to.params.account; // 현재 패스에 있는 account를 받아옴
   _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('accountIndex', account);
   next();
 }
@@ -21988,7 +22014,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* BoardList */\r\n.board-list-box {\r\n    display: grid;\r\n    grid-template-columns: repeat(2, minmax(100px, 1fr));\r\n    gap: 5px;\r\n}\r\n.board-list-box > .item {\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #000;\r\n    min-width: 100px;\r\n    min-height: 150px;\r\n}\r\n.board-list-box > .item > img {\r\n    width: 100%;\r\n}\r\n\r\n/* BoardDetail */\r\n.board-detail-box {\r\n    position: fixed;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    top: 0;\r\n    left: 0;\r\n    background-color: rgba(0, 0, 0, 0.7);\r\n    width: 100vw;\r\n    height: 100vh;\r\n}\r\n.board-detail-box > .item {\r\n    width: 70vw;\r\n    max-width: 700px;\r\n    background-color: #fff;\r\n    padding: 10px;\r\n}\r\n.board-detail-box > .item > img {\r\n    width: 100%;\r\n}\r\n.board-detail-box > .item > .etc-box {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* BoardList */\r\n.board-list-box {\r\n    display: grid;\r\n    grid-template-columns: repeat(2, minmax(100px, 1fr));\r\n    gap: 5px;\r\n}\r\n.board-list-box > .item {\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #000;\r\n    min-width: 100px;\r\n    min-height: 150px;\r\n}\r\n.board-list-box > .item > img {\r\n    width: 100%;\r\n}\r\n\r\n/* BoardDetail */\r\n.board-detail-box {\r\n    position: fixed;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    top: 0;\r\n    left: 0;\r\n    background-color: rgba(0, 0, 0, 0.7);\r\n    width: 100vw;\r\n    height: 100vh;\r\n}\r\n.board-detail-box > .item {\r\n    width: 70vw;\r\n    max-width: 700px;\r\n    background-color: #fff;\r\n    padding: 10px;\r\n}\r\n.board-detail-box > .item > img {\r\n    width: 100%;\r\n}\r\n.board-detail-box > .item > .etc-box {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n}\r\n\r\n.btn-margin {\r\n    margin: 10px;\r\n    width: 2rem;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

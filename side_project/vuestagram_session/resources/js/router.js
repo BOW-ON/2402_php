@@ -57,8 +57,9 @@ function chkAuthReturn(to, from, next) {
     next();
 }
 
+// 해당 아이디를 받을 경우에만 처리
 function accountIndex(to, from, next) {
-    const account = to.params.account
+    const account = to.params.account // 현재 패스에 있는 account를 받아옴
     store.dispatch('accountIndex', account);
     next();
 }

@@ -41,3 +41,8 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.btn-margin {
+    margin: 10px;
+    width: 2rem;
+}
