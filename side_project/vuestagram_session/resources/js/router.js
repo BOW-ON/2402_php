@@ -13,7 +13,7 @@ const routes = [
         {
             path: '/login',
             component: LoginComponent,
-            beforeEnter: chkAuthReturn, // 
+            beforeEnter: chkAuthReturn,
         },
         {
             path: '/board',
@@ -28,6 +28,11 @@ const routes = [
         {
             path: '/registration',
             component: RegistrationComponent,
+        },
+        {
+            path: '/board/:account',
+            component: BoardComponent,
+            beforeEnter: hyunsoo,
         },
 ];
 
@@ -49,6 +54,12 @@ function chkAuthReturn(to, from, next) {
         }
         next(from.path);
     }
+    next();
+}
+
+function hyunsoo(to, from, next) {
+    const account = to.params.account
+    store.dispatch('hyunsoo', account);
     next();
 }
 

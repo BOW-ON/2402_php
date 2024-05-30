@@ -20945,7 +20945,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
 
+
+
+
+// Vuex에서  useStore 사용
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'BoardComponent',
@@ -20953,6 +20958,7 @@ __webpack_require__.r(__webpack_exports__);
     var __expose = _ref.expose;
     __expose();
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
 
     // 상세 모달 관련
     //  >> 계속 저장되는 변수 이므로 let으로 선언
@@ -20970,12 +20976,13 @@ __webpack_require__.r(__webpack_exports__);
     // 게시글 습득 관련
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(function () {
       // 다른페이지 갔다가 다시 돌아오면 서버에 게시글 획득 재요청을 방지하기 위해 if로 특정 상황일때만 요청하기
-      if (store.state.boardData.length < 1) {
+      if (store.state.boardData.length < 1 && router.path == '/board') {
         store.dispatch('getBoardData');
       }
     });
     var __returned__ = {
       store: store,
+      router: router,
       get detailItem() {
         return detailItem;
       },
@@ -20995,6 +21002,9 @@ __webpack_require__.r(__webpack_exports__);
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       get useStore() {
         return vuex__WEBPACK_IMPORTED_MODULE_1__.useStore;
+      },
+      get useRoute() {
+        return vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute;
       }
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -21196,34 +21206,41 @@ var _hoisted_2 = {
   "class": "item"
 };
 var _hoisted_3 = ["src"];
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
-var _hoisted_6 = {
+var _hoisted_4 = {
   "class": "etc-box"
 };
-var _hoisted_7 = {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-bg-blue btn-close"
+}, "좋아요", -1 /* HOISTED */);
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_8 = {
+  "class": "etc-box"
+};
+var _hoisted_9 = {
   "class": "board-list-box"
 };
-var _hoisted_8 = ["onClick"];
-var _hoisted_9 = ["src"];
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_10 = ["onClick"];
+var _hoisted_11 = ["src"];
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "#",
   "class": "btn btn-bg-white btn-fixed"
 }, "TOP", -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 상세 모달 "), $setup.detailFlg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: $setup.detailItem.img
-  }, null, 8 /* PROPS */, _hoisted_3), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.content), 1 /* TEXT */), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "작성자 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "좋아요 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.like), 1 /* TEXT */), _hoisted_5]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.content), 1 /* TEXT */), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "작성자 : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.detailItem.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_ctx.$store.state.userInfo.id === $setup.detailItem.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $setup.closeDetail();
+      return _ctx.$store.dispatch('boardDelete', $setup.detailItem.id), $setup.closeDetail();
     }),
     "class": "btn btn-bg-black btn-delete"
-  }, "삭제"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "삭제")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.closeDetail();
     }),
     "class": "btn btn-bg-red btn-close"
-  }, "닫기")])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 리스트 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.$store.state.boardData, function (item, key) {
+  }, "닫기")])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 리스트 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.$store.state.boardData, function (item, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       onClick: function onClick($event) {
         return $setup.openDetail(item);
@@ -21232,7 +21249,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "item"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: item.img
-    }, null, 8 /* PROPS */, _hoisted_9)], 8 /* PROPS */, _hoisted_8);
+    }, null, 8 /* PROPS */, _hoisted_11)], 8 /* PROPS */, _hoisted_10);
   }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-if=\"$store.state.moreBoardFlg\" : 습득할 데이터가 없으면 더보기 버튼 없애기 위해 작성 "), _ctx.$store.state.moreBoardFlg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     onClick: _cache[2] || (_cache[2] = function ($event) {
@@ -21240,7 +21257,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "class": "btn btn-bg-black btn-more",
     type: "button"
-  }, "더보기")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_10], 64 /* STABLE_FRAGMENT */);
+  }, "더보기")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_12], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -21544,7 +21561,7 @@ var routes = [{
 }, {
   path: '/login',
   component: _components_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  beforeEnter: chkAuthReturn // 
+  beforeEnter: chkAuthReturn
 }, {
   path: '/board',
   component: _components_BoardComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -21556,6 +21573,10 @@ var routes = [{
 }, {
   path: '/registration',
   component: _components_RegistrationComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, {
+  path: '/board/:account',
+  component: _components_BoardComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+  beforeEnter: hyunsoo
 }];
 
 // 로그인 상태일때만 페이지 이동
@@ -21576,6 +21597,11 @@ function chkAuthReturn(to, from, next) {
     }
     next(from.path);
   }
+  next();
+}
+function hyunsoo(to, from, next) {
+  var account = to.params.account;
+  _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('hyunsoo', account);
   next();
 }
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_5__.createRouter)({
@@ -21599,6 +21625,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -21630,10 +21657,31 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
     setUserInfo: function setUserInfo(state, userInfo) {
       state.userInfo = userInfo;
     },
+    // ** 게시글 삽입(게시글 불러오기) **
     // 게시글 초기 삽입
     setBoardData: function setBoardData(state, data) {
       state.boardData = data;
     },
+    // 보드리스트의 가장 앞에 작성한 글정보 추가
+    setUnshiftBoardData: function setUnshiftBoardData(state, data) {
+      state.boardData.unshift(data);
+    },
+    // 유저의 작성글 수 1 증가
+    setUserBoardCount: function setUserBoardCount(state) {
+      state.userInfo.boards_count++;
+    },
+    // ** 게시글 삭제 **
+    // 게시글 목록에서 빼기
+    setUserBoardData: function setUserBoardData(state, index) {
+      console.log(state.boardData); // TODO
+      state.boardData.splice(index, 1);
+      console.log(state.boardData); // TODO
+    },
+    // 유저의 작성글 수 1 감소
+    setUserBoardsCountSub: function setUserBoardsCountSub(state) {
+      state.userInfo.boards_count--;
+    },
+    // ** 더보기 버튼 **
     // 더보기 버튼 플래그 저장
     setMoreBoardFlg: function setMoreBoardFlg(state, flg) {
       state.moreBoardFlg = flg;
@@ -21642,19 +21690,12 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
     setMoreBoardData: function setMoreBoardData(state, data) {
       // 기존 습득했던 데이터와 더보기로 습득한 데이터를 합치기 (... 이용)
       state.boardData = [].concat(_toConsumableArray(state.boardData), _toConsumableArray(data));
-    },
-    // 게시글 삽입
-    // 보드리스트의 가장 앞에 작성한 글정보 추가
-    setUnshiftBoardData: function setUnshiftBoardData(state, data) {
-      state.boardData.unshift(data);
-    },
-    // 유저의 작성글 수 1 증가
-    setUserBoardCount: function setUserBoardCount(state) {
-      state.userInfo.boards_count++;
     }
   },
   actions: {
+    // --------------------------
     // ** 접속 관련 **
+    // --------------------------
     /**
      * 로그인 처리
      * 
@@ -21710,7 +21751,26 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
         _router__WEBPACK_IMPORTED_MODULE_0__["default"].replace('/login');
       });
     },
+    /**
+     * 회원가입 처리
+     * 
+     * @param {*} context
+     */
+    registration: function registration(context) {
+      var url = '/api/registration';
+      var data = new FormData(document.querySelector('#registrationForm'));
+      axios.post(url, data).then(function (response) {
+        console.log(response.data); // TODO
+
+        _router__WEBPACK_IMPORTED_MODULE_0__["default"].replace('/login');
+      })["catch"](function (error) {
+        console.log(error.response); // TODO
+        alert('회원가입에 실패했습니다. (' + error.response.data.code + ')');
+      });
+    },
+    // --------------------------
     // ** 게시글 관련 **
+    // --------------------------
     /**
      * 최초 게시글 획득
      * 
@@ -21755,20 +21815,20 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
       });
     },
     /**
-     * 회원가입 처리
+     * 유저 아이디를 입력했을때 해당 게시글 획득
      * 
      * @param {*} context
      */
-    registration: function registration(context) {
-      var url = '/api/registration';
-      var data = new FormData(document.querySelector('#registrationForm'));
-      axios.post(url, data).then(function (response) {
+    hyunsoo: function hyunsoo(context, account) {
+      var url = '/api/hyunsoo/' + account;
+      axios.get(url).then(function (response) {
         console.log(response.data); // TODO
 
-        _router__WEBPACK_IMPORTED_MODULE_0__["default"].replace('/login');
+        // 보내온 데이터를 뮤테이션의 setBoardData 를 통해 state에 삽입
+        context.commit('setBoardData', response.data.data);
       })["catch"](function (error) {
         console.log(error.response); // TODO
-        alert('회원가입에 실패했습니다. (' + error.response.data.code + ')');
+        alert('게시글 획득에 실패했습니다. ( ' + error.response.data.code + ' )');
       });
     },
     /**
@@ -21794,6 +21854,34 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
       })["catch"](function (error) {
         console.log(error.response); // TODO
         alert('글 작성에 실패했습니다. (' + error.response.data.code + ')');
+      });
+    },
+    /**
+     * 글삭제 처리
+     * 
+     * @param {*} context
+     */
+    boardDelete: function boardDelete(context, id) {
+      var url = '/api/delete/' + id;
+      axios["delete"](url).then(function (response) {
+        console.log(response.data.data); // TODO
+        console.log(_typeof(response.data.data)); // TODO
+
+        // 보드 데이터의 삭제한 글 정보 빼기
+        context.state.boardData.forEach(function (item, key) {
+          if (item.id == response.data.data) {
+            context.commit('setUserBoardData', key);
+            return false;
+          }
+        });
+
+        // 유저의 작성글 수 1 하락
+        context.commit('setUserBoardsCountSub');
+        localStorage.setItem('userInfo', JSON.stringify(context.state.userInfo));
+        _router__WEBPACK_IMPORTED_MODULE_0__["default"].replace('/board');
+      })["catch"](function (error) {
+        console.log(error.response); // TODO
+        alert('글 삭제에 실패했습니다. ( ' + error.response.data.code + ' )');
       });
     }
   }
@@ -21925,7 +22013,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Pen+Script&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    margin: 0;\r\n    padding: 0;\r\n    box-sizing: border-box;\r\n    font-family: \"Nanum Brush Script\", cursive;\r\n    font-weight: 400;\r\n    font-style: normal;\r\n    font-size: 1.1rem;\r\n\r\n}\r\n\r\nbody {\r\n    padding: 10px 10px;\r\n    max-width: 800px;\r\n    margin: auto;\r\n    -ms-overflow-style: none;\r\n    background-color: rgb(155, 155, 155);\r\n}\r\n\r\n::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\nhr {\r\n    margin: 10px 0;\r\n}\r\n\r\nh1 {\r\n    font-size: 2.5rem;\r\n}\r\n\r\n/* a Tag */\r\na {\r\n    text-decoration: none;\r\n    color: #000;\r\n}\r\na:hover {\r\n    font-weight: 900;\r\n}\r\n\r\n/* Button */\r\n.btn-group {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    gap: 10px;\r\n}\r\n\r\n.btn {\r\n    border-radius: 15px;\r\n    font-size: 1rem;\r\n    height: 40px;\r\n    line-height: 40px;\r\n    border: none;\r\n    text-decoration: none;\r\n    cursor: pointer;\r\n    text-align: center;\r\n}\r\n.btn:hover {\r\n    font-weight: 900;\r\n}\r\n.btn-header {\r\n    width: 80px;\r\n    margin-left: 0.2rem;\r\n}\r\n.btn-close .btn-delete {\r\n    width: 60px;\r\n}\r\n.btn-bg-black {\r\n    color: #fff;\r\n    background-color: #000;\r\n}\r\n.btn-bg-white {\r\n    color: #000;\r\n    background-color: #fff;\r\n}\r\n.btn-bg-red {\r\n    color: #fff;\r\n    background-color: red;\r\n}\r\n.btn-fixed {\r\n    position: fixed;\r\n    bottom: 2rem;\r\n    right: 2rem;\r\n    padding: 0 1rem;\r\n    font-weight: bold;\r\n}\r\n#btn-img {\r\n    display: none;\r\n}\r\n.btn-file {\r\n    font-weight: bold;\r\n    border: 1px solid black;\r\n    background-color: transparent;\r\n    cursor: pointer;\r\n}\r\n.btn-more {\r\n    margin-top: 20px;\r\n    width: 100%;\r\n}\r\n\r\n\r\n/* Form */\r\n.form-box {\r\n    display: grid;\r\n    grid-template-columns: 1fr;\r\n    gap: 10px;\r\n    place-items: center;\r\n    margin: 20px auto;\r\n    width: 300px;\r\n    border: 1px solid #c5c5c5;\r\n    padding: 0 20px 20px;\r\n}\r\n.form-box > * {\r\n    width: 80%;\r\n    margin: 5px;\r\n}\r\n.form-box > input:not([type=\"file\"]) {\r\n    height: 40px;\r\n    background-color: #f0f0f0;\r\n    border-radius: 5px;\r\n    border: 1px solid #c5c5c5;\r\n    padding: 0 10px;\r\n}\r\n.form-title {\r\n    font-size: 2rem;\r\n    font-weight: 900;\r\n    margin: 20px;\r\n    text-align: center;\r\n}\r\ntextarea {\r\n    width: 100%;\r\n    height: 160px;\r\n    border: none;\r\n    resize: none;\r\n    padding: 5px;\r\n}\r\ntextarea:focus {\r\n    outline: none;\r\n    border: 1px solid #c5c5c5;\r\n    border-radius: 10px;\r\n}\r\n.radio-box {\r\n    display: flex;\r\n    justify-content: space-around;\r\n}\r\n.radio-box label {\r\n    margin-right: 5px;\r\n}\r\n\r\n/* Header */\r\nheader {\r\n    padding: 0 20px;\r\n}\r\n.title {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n/* .header-container{\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    max-width: 1000px;\r\n    padding: 10px 20px;\r\n} */\r\n.header-content {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.img-logo {\r\n    width: 50px;\r\n    height: 50px;\r\n}\r\n\r\n/* main */\r\n/* .container {\r\n    display: flex;\r\n    justify-content: center;\r\n} */\r\n\r\n/* Footer */\r\nfooter {\r\n    margin-top: 50px;\r\n    text-align: center;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    margin: 0;\r\n    padding: 0;\r\n    box-sizing: border-box;\r\n    font-family: \"Nanum Brush Script\", cursive;\r\n    font-weight: 400;\r\n    font-style: normal;\r\n    font-size: 1.1rem;\r\n\r\n}\r\n\r\nbody {\r\n    padding: 10px 10px;\r\n    max-width: 800px;\r\n    margin: auto;\r\n    -ms-overflow-style: none;\r\n    background-color: rgb(155, 155, 155);\r\n}\r\n\r\n::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\nhr {\r\n    margin: 10px 0;\r\n}\r\n\r\nh1 {\r\n    font-size: 2.5rem;\r\n}\r\n\r\n/* a Tag */\r\na {\r\n    text-decoration: none;\r\n    color: #000;\r\n}\r\na:hover {\r\n    font-weight: 900;\r\n}\r\n\r\n/* Button */\r\n.btn-group {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    gap: 10px;\r\n}\r\n\r\n.btn {\r\n    border-radius: 15px;\r\n    font-size: 1rem;\r\n    height: 40px;\r\n    line-height: 40px;\r\n    border: none;\r\n    text-decoration: none;\r\n    cursor: pointer;\r\n    text-align: center;\r\n}\r\n.btn:hover {\r\n    font-weight: 900;\r\n}\r\n.btn-header {\r\n    width: 80px;\r\n    margin-left: 0.2rem;\r\n}\r\n.btn-close .btn-delete {\r\n    width: 60px;\r\n}\r\n.btn-bg-black {\r\n    color: #fff;\r\n    background-color: #000;\r\n}\r\n.btn-bg-white {\r\n    color: #000;\r\n    background-color: #fff;\r\n}\r\n.btn-bg-red {\r\n    color: #fff;\r\n    background-color: red;\r\n}\r\n.btn-bg-blue {\r\n    color: #fff;\r\n    background-color: blue\r\n}\r\n.btn-fixed {\r\n    position: fixed;\r\n    bottom: 2rem;\r\n    right: 2rem;\r\n    padding: 0 1rem;\r\n    font-weight: bold;\r\n}\r\n#btn-img {\r\n    display: none;\r\n}\r\n.btn-file {\r\n    font-weight: bold;\r\n    border: 1px solid black;\r\n    background-color: transparent;\r\n    cursor: pointer;\r\n}\r\n.btn-more {\r\n    margin-top: 20px;\r\n    width: 100%;\r\n}\r\n\r\n\r\n/* Form */\r\n.form-box {\r\n    display: grid;\r\n    grid-template-columns: 1fr;\r\n    gap: 10px;\r\n    place-items: center;\r\n    margin: 20px auto;\r\n    width: 300px;\r\n    border: 1px solid #c5c5c5;\r\n    padding: 0 20px 20px;\r\n}\r\n.form-box > * {\r\n    width: 80%;\r\n    margin: 5px;\r\n}\r\n.form-box > input:not([type=\"file\"]) {\r\n    height: 40px;\r\n    background-color: #f0f0f0;\r\n    border-radius: 5px;\r\n    border: 1px solid #c5c5c5;\r\n    padding: 0 10px;\r\n}\r\n.form-title {\r\n    font-size: 2rem;\r\n    font-weight: 900;\r\n    margin: 20px;\r\n    text-align: center;\r\n}\r\ntextarea {\r\n    width: 100%;\r\n    height: 160px;\r\n    border: none;\r\n    resize: none;\r\n    padding: 5px;\r\n}\r\ntextarea:focus {\r\n    outline: none;\r\n    border: 1px solid #c5c5c5;\r\n    border-radius: 10px;\r\n}\r\n.radio-box {\r\n    display: flex;\r\n    justify-content: space-around;\r\n}\r\n.radio-box label {\r\n    margin-right: 5px;\r\n}\r\n\r\n/* Header */\r\nheader {\r\n    padding: 0 20px;\r\n}\r\n.title {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n/* .header-container{\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    max-width: 1000px;\r\n    padding: 10px 20px;\r\n} */\r\n.header-content {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.img-logo {\r\n    width: 50px;\r\n    height: 50px;\r\n}\r\n\r\n/* main */\r\n/* .container {\r\n    display: flex;\r\n    justify-content: center;\r\n} */\r\n\r\n/* Footer */\r\nfooter {\r\n    margin-top: 50px;\r\n    text-align: center;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

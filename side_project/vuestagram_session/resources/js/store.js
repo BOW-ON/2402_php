@@ -31,24 +31,11 @@ const store = createStore({
             state.userInfo = userInfo;
         },
 
-
+        // ** 게시글 삽입(게시글 불러오기) **
         // 게시글 초기 삽입
         setBoardData(state, data) {
             state.boardData = data;
         },
-
-        // 더보기 버튼 플래그 저장
-        setMoreBoardFlg(state, flg) {
-            state.moreBoardFlg = flg;
-        },
-        
-        // 더보기 게시글 추가
-        setMoreBoardData(state, data) {
-            // 기존 습득했던 데이터와 더보기로 습득한 데이터를 합치기 (... 이용)
-            state.boardData = [...state.boardData, ...data];
-        },
-
-        // 게시글 삽입
         // 보드리스트의 가장 앞에 작성한 글정보 추가
         setUnshiftBoardData(state, data) {
             state.boardData.unshift(data);
@@ -57,10 +44,39 @@ const store = createStore({
         setUserBoardCount(state) {
             state.userInfo.boards_count++;
         },
+        
+        // ** 게시글 삭제 **
+        // 게시글 목록에서 빼기
+        setUserBoardData(state, index) {
+            console.log(state.boardData) // TODO
+            state.boardData.splice(index, 1);
+            console.log(state.boardData) // TODO
+        },
+        // 유저의 작성글 수 1 감소
+        setUserBoardsCountSub(state) {
+            state.userInfo.boards_count--;
+        },
+
+        
+        // ** 더보기 버튼 **
+        // 더보기 버튼 플래그 저장
+        setMoreBoardFlg(state, flg) {
+            state.moreBoardFlg = flg;
+        },
+        // 더보기 게시글 추가
+        setMoreBoardData(state, data) {
+            // 기존 습득했던 데이터와 더보기로 습득한 데이터를 합치기 (... 이용)
+            state.boardData = [...state.boardData, ...data];
+        },
+        
+
+
     },
     actions: {
-
+        
+        // --------------------------
         // ** 접속 관련 **
+        // --------------------------
 
         /**
          * 로그인 처리
@@ -95,8 +111,6 @@ const store = createStore({
             });
         },
 
-
-
         /**
          * 로그아웃 처리
          * 
@@ -128,10 +142,34 @@ const store = createStore({
                 router.replace('/login');
             });
         },
+        
+        /**
+         * 회원가입 처리
+         * 
+         * @param {*} context
+         */
+        registration(context) {
+            const url = '/api/registration';
+            const data = new FormData(document.querySelector('#registrationForm'));
+
+            axios.post(url, data)
+            .then(response => {
+                console.log(response.data); // TODO
+
+                router.replace('/login');
+            })
+            .catch(error => {
+                console.log(error.response); // TODO
+                alert('회원가입에 실패했습니다. (' + error.response.data.code + ')')
+            });
+        },
 
 
 
+
+        // --------------------------
         // ** 게시글 관련 **
+        // --------------------------
 
         /**
          * 최초 게시글 획득
@@ -184,29 +222,32 @@ const store = createStore({
                 console.log(error.response); // TODO
                 alert('추가 게시글 획득에 실패했습니다. (' + error.response.data.code + ')')
             });
-
+            
         },
 
         /**
-         * 회원가입 처리
+         * 유저 아이디를 입력했을때 해당 게시글 획득
          * 
          * @param {*} context
          */
-        registration(context) {
-            const url = '/api/registration';
-            const data = new FormData(document.querySelector('#registrationForm'));
+        hyunsoo(context, account) {
+            const url = '/api/hyunsoo/' + account;
 
-            axios.post(url, data)
+            axios.get(url)
             .then(response => {
                 console.log(response.data); // TODO
 
-                router.replace('/login');
+                // 보내온 데이터를 뮤테이션의 setBoardData 를 통해 state에 삽입
+                context.commit('setBoardData', response.data.data);
+
             })
             .catch(error => {
                 console.log(error.response); // TODO
-                alert('회원가입에 실패했습니다. (' + error.response.data.code + ')')
+                alert('게시글 획득에 실패했습니다. ( ' + error.response.data.code + ' )')
             });
         },
+
+
 
         /**
          * 글작성 처리
@@ -236,7 +277,40 @@ const store = createStore({
                 console.log(error.response); // TODO
                 alert('글 작성에 실패했습니다. (' + error.response.data.code + ')')
             });
-        }
+        },
+
+        /**
+         * 글삭제 처리
+         * 
+         * @param {*} context
+         */
+        boardDelete(context, id) {
+            const url = '/api/delete/' + id;
+
+            axios.delete(url)
+            .then(response => {
+                console.log(response.data.data) // TODO
+                console.log(typeof(response.data.data)) // TODO
+
+                // 보드 데이터의 삭제한 글 정보 빼기
+                context.state.boardData.forEach((item, key) => {
+                    if(item.id == response.data.data) {
+                        context.commit('setUserBoardData', key)
+                        return false;
+                    }
+                });
+
+                // 유저의 작성글 수 1 하락
+                context.commit('setUserBoardsCountSub');
+                localStorage.setItem('userInfo', JSON.stringify(context.state.userInfo));
+
+                router.replace('/board')
+            })
+            .catch(error => {
+                console.log(error.response); // TODO
+                alert('글 삭제에 실패했습니다. ( ' + error.response.data.code + ' )');
+            });
+        },
 
     }
 });

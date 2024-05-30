@@ -3,23 +3,27 @@
   <div v-if="detailFlg" class="board-detail-box">
     <div class="item">
       <img :src="detailItem.img">
+      <div class="etc-box">
+        <span>좋아요 : {{ detailItem.like }}</span>
+        <button class="btn btn-bg-blue btn-close">좋아요</button>
+      </div>
       <hr>
       <p>{{ detailItem.content }}</p>
       <hr>
       <div class="etc-box">
         <span>작성자 : {{ detailItem.name }}</span>
         <div>
-          <button @click="closeDetail()" class="btn btn-bg-black btn-delete">삭제</button>
+          <button v-if="$store.state.userInfo.id === detailItem.user_id" @click="$store.dispatch('boardDelete', detailItem.id), closeDetail()" class="btn btn-bg-black btn-delete">삭제</button>
           <button @click="closeDetail()" class="btn btn-bg-red btn-close">닫기</button>
         </div>
       </div>
     </div>
   </div>
-
+  
   <!-- 리스트 -->
   <div class="board-list-box">
     <div @click="openDetail(item)" v-for="(item, key) in $store.state.boardData" :key="key" class="item">
-        <img :src="item.img">
+      <img :src="item.img">   
     </div>
   </div>
   <!-- v-if="$store.state.moreBoardFlg" : 습득할 데이터가 없으면 더보기 버튼 없애기 위해 작성 -->
@@ -30,8 +34,13 @@
 <script setup>
 import { onBeforeMount, reactive, ref } from 'vue';
 import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
 
+
+// Vuex에서  useStore 사용
 const store = useStore();
+
+const router = useRoute();
 
 
 // 상세 모달 관련
@@ -53,10 +62,9 @@ function closeDetail() {
 // 게시글 습득 관련
 onBeforeMount(() => {
   // 다른페이지 갔다가 다시 돌아오면 서버에 게시글 획득 재요청을 방지하기 위해 if로 특정 상황일때만 요청하기
-  if(store.state.boardData.length < 1) {
+  if(store.state.boardData.length < 1 && router.path == '/board' ) {
     store.dispatch('getBoardData');
   }
-
 })
 
 </script>

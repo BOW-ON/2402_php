@@ -49,6 +49,25 @@ class BoardController extends Controller
         return response()->json($responseData, 200);
     }
 
+    // ** url에 검색한 아이디의 게시글 획득 **
+    public function accontIndex($account) {
+        $boardData = Board::select('boards.*', 'users.account' )
+                        ->join('users', 'users.id', '=', 'boards.user_id')
+                        ->where('users.account', '=', $account)
+                        ->orderBy('boards.id','DESC')
+                        ->limit(20)
+                        ->get();
+
+        // 레스폰스 데이터 생성
+        $responseData = [
+            'code' => '0'
+            ,'msg' => '게시글 획득 완료'
+            ,'data' => $boardData->toArray()
+        ];
+        return response()->json($responseData, 200);
+
+    }
+
 
     // ** 게시글 작성  **
     public function boardCreate(Request $request) {
@@ -57,22 +76,22 @@ class BoardController extends Controller
             'content' => $request->content
             ,'img' => $request->img
         ];
-
+        
         // 유효성 검사
         $validator = Validator::make(
             $requestData
             ,[
                 'content' => ['required', 'min:1' ,'max:200']
                 ,'img' => ['required', 'image']
-            ]
-        );
-
+                ]
+            );
+            
         // 유효성 검사 실패 시 처리
         if($validator->fails()){
             Log::debug('유효성 검사 실패', $validator->errors()->toArray());
             throw new MyValidateException('E01');
         }
-
+        
         // // ** 엘러펀트로 처리 **
         // // 이미지 파일 저장
         // $path = $request->file('img')->store('img');
@@ -85,19 +104,19 @@ class BoardController extends Controller
         // $boardModel->img = $path;
         // $boardModel->user_id = Auth::id();
         // $boardModel->save();
-
-
+        
+        
         // ** 배열로 처리하기 (일반적으로 많이 사용함) **
         // insert 데이터 생성
         $inserData = $request->only('content');
         $inserData['user_id'] = Auth::id();
-
+        
         $filePath = $request->file('img')->store('img');
         $inserData['img'] = '/'.$filePath; // 제일 앞 /는 생략가능
-
+        
         // insert 처리
         $BoardInfo = Board::create($inserData);
-
+        
         // response 데이터 생성
         $responseData = [
             'code' => '0'
@@ -106,7 +125,25 @@ class BoardController extends Controller
         ];
 
         return response()->json($responseData, 200);
-
+        
     }
+
+    
+    // ** 게시글 삭제  **
+    public function boardDelete($id) {
+        
+        Board::destroy($id);
+        
+        $responseData = [
+            'code' => '0'
+            ,'msg' => '글 삭제 완료'
+            ,'data' => $id
+        ];
+
+        return response()->json($responseData);
+    }
+
+    
+
 }
 

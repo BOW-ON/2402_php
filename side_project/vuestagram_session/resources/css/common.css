@@ -79,6 +79,10 @@ a:hover {
     color: #fff;
     background-color: red;
 }
+.btn-bg-blue {
+    color: #fff;
+    background-color: blue
+}
 .btn-fixed {
     position: fixed;
     bottom: 2rem;
