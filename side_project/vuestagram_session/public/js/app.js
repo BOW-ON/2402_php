@@ -21576,7 +21576,7 @@ var routes = [{
 }, {
   path: '/board/:account',
   component: _components_BoardComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-  beforeEnter: hyunsoo
+  beforeEnter: accountIndex
 }];
 
 // 로그인 상태일때만 페이지 이동
@@ -21599,9 +21599,9 @@ function chkAuthReturn(to, from, next) {
   }
   next();
 }
-function hyunsoo(to, from, next) {
+function accountIndex(to, from, next) {
   var account = to.params.account;
-  _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('hyunsoo', account);
+  _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('accountIndex', account);
   next();
 }
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_5__.createRouter)({
@@ -21819,8 +21819,8 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
      * 
      * @param {*} context
      */
-    hyunsoo: function hyunsoo(context, account) {
-      var url = '/api/hyunsoo/' + account;
+    accountIndex: function accountIndex(context, account) {
+      var url = '/api/accountIndex/' + account;
       axios.get(url).then(function (response) {
         console.log(response.data); // TODO
 

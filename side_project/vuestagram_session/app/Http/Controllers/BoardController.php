@@ -50,7 +50,7 @@ class BoardController extends Controller
     }
 
     // ** url에 검색한 아이디의 게시글 획득 **
-    public function accontIndex($account) {
+    public function accountIndex($account) {
         $boardData = Board::select('boards.*', 'users.account' )
                         ->join('users', 'users.id', '=', 'boards.user_id')
                         ->where('users.account', '=', $account)

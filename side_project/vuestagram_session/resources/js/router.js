@@ -32,7 +32,7 @@ const routes = [
         {
             path: '/board/:account',
             component: BoardComponent,
-            beforeEnter: hyunsoo,
+            beforeEnter: accountIndex,
         },
 ];
 
@@ -57,9 +57,9 @@ function chkAuthReturn(to, from, next) {
     next();
 }
 
-function hyunsoo(to, from, next) {
+function accountIndex(to, from, next) {
     const account = to.params.account
-    store.dispatch('hyunsoo', account);
+    store.dispatch('accountIndex', account);
     next();
 }
 

@@ -230,8 +230,8 @@ const store = createStore({
          * 
          * @param {*} context
          */
-        hyunsoo(context, account) {
-            const url = '/api/hyunsoo/' + account;
+        accountIndex(context, account) {
+            const url = '/api/accountIndex/' + account;
 
             axios.get(url)
             .then(response => {
