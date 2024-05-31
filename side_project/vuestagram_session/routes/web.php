@@ -32,8 +32,9 @@ Route::middleware('auth')->post('/api/logout', [UserController::class, 'logout']
 Route::middleware('auth')->get('/api/board', [BoardController::class, 'index']);
 Route::middleware('auth')->get('/api/board/{id}', [BoardController::class, 'moreIndex']);
 Route::middleware('auth')->post('/api/create', [BoardController::class, 'boardCreate']);
+Route::middleware('auth')->post('/api/board/like/{boardID}', [BoardController::class, 'likeBtn']);
 Route::middleware('auth')->delete('/api/delete/{id}', [BoardController::class, 'boardDelete']);
-Route::middleware('auth')->get('/api/accountIndex/{account}', [BoardController::class, 'accountIndex']);
+Route::get('/api/accountIndex/{account}', [BoardController::class, 'accountIndex']);
 
 // 회원 가입 관련
 // 회원가입은 인증 할 필요 없어서 middleware 사용 안함

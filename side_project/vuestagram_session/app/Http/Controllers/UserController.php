@@ -125,7 +125,7 @@ class UserController extends Controller
 
         // 파일 저장
         //  >> 기본 저장이 store에 저장됨 so) config/filesystems.php 에서 경로 수정
-        $insertData['profile'] = $request->file('profile')->store('profile');
+        $insertData['profile'] = '/'.$request->file('profile')->store('profile');
         // 파일 명을 문자열로 보내옴
 
         // 비밀번호 설정

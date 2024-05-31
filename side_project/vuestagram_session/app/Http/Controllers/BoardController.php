@@ -6,15 +6,18 @@ use App\Models\Board;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Exceptions\MyValidateException;
+use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class BoardController extends Controller
 {
     // ** 최초 게시글 획득 **
     public function index() {
-        $boardData = Board::select('boards.*', 'users.name')
+        $boardData = Board::select('boards.*', 'users.name', 'likes.like_chk')
                         ->join('users', 'users.id', '=', 'boards.user_id')
+                        ->leftJoin('likes', 'likes.board_id', '=', 'boards.id')
                         // ->where('boards.user_id', '=', Auth::id()) // 로그인한 유저의 데이터만 가져오고 싶을 경우 where 처리
                         ->orderBy('boards.id','DESC')
                         ->limit(20)
@@ -48,6 +51,48 @@ class BoardController extends Controller
         ];
         return response()->json($responseData, 200);
     }
+    
+    public function likeBtn($board_id) {
+
+        DB::beginTransaction();
+
+        // like 검색
+        $likeData = Like::where('user_id', Auth::id())
+                            ->where('board_id', $board_id)
+                            ->first();
+
+        if(isset($likeData)) {
+            $likeData->like_chk = $likeData->like_chk == '0' ? '1' : '0';
+        } else {
+            $likeData = new Like();
+            $likeData->user_id = Auth::id();
+            $likeData->board_id = $board_id;
+            $likeData->like_chk = '1';
+        }
+        $likeData->save();
+
+        // boards 갱신
+        $boardData = Board::find($board_id);
+
+        if($likeData->like_chk == '1') {
+            $boardData->like += 1;
+        } else {
+            $boardData->like -= 1;
+        }
+        $boardData->save();
+
+        DB::commit();
+
+        $responseData = [
+            'code' => '0'
+            ,'msg' => '좋아요 완료'
+            ,'data' => $likeData
+        ];
+
+        return response()->json($responseData, 200);
+    }
+
+
 
     // ** url에 검색한 아이디의 게시글 획득 **
     public function accountIndex($account) {

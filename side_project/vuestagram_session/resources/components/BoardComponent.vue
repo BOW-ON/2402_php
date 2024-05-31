@@ -5,7 +5,7 @@
       <img :src="detailItem.img">
       <div class="etc-box">
         <span>좋아요 : {{ detailItem.like }}</span>
-        <button class="btn btn-bg-blue btn-close">좋아요</button>
+        <button @click="likeBtn(detailItem), $store.dispatch('likeBtn', detailItem.id)" class="btn btn-bg-blue btn-close">좋아요</button>
       </div>
       <hr>
       <p>{{ detailItem.content }}</p>
@@ -27,7 +27,13 @@
     </div>
   </div>
   <!-- v-if="$store.state.moreBoardFlg" : 습득할 데이터가 없으면 더보기 버튼 없애기 위해 작성 -->
-  <button v-if="$store.state.moreBoardFlg" @click="$store.dispatch('getMoreBoardData')" class="btn btn-bg-black btn-more" type="button">더보기</button>
+  <button
+    v-if="$store.state.moreBoardFlg"
+    @click="$store.dispatch('getMoreBoardData')"
+    class="btn btn-bg-black btn-more"
+    type="button">
+      더보기
+  </button>
   <a href="#" class="btn btn-bg-white btn-fixed">TOP</a>
 
 </template>
@@ -55,6 +61,16 @@ function openDetail(data) {
 function closeDetail() {
   detailItem = {}; // detailItem 초기화
   detailFlg.value = false; // 상세 플래그 false로 변환
+}
+
+function likeBtn(data) {
+  if(data.like_chk == 1) {
+    data.like_chk = 0;
+    data.like--;
+  } else {
+    data.like_chk = 1;
+    data.like++;
+  }
 }
 
 

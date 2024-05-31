@@ -49,12 +49,11 @@ function chkAuth(to, from, next) {
 // 로그인 상태에서 로그인 페이지로 가면 board로 이동
 function chkAuthReturn(to, from, next) {
     if(to.path === '/login' && store.state.authFlg) {
-        if(from.path === '/') {
-            next('board');
-        }
-        next(from.path);
+        alert('로그아웃하여 이동 해주세요.')
+        history.back(); // JS문법(이전 화면으로 돌아가기)
+    } else {
+        next();
     }
-    next();
 }
 
 // 해당 아이디를 받을 경우에만 처리

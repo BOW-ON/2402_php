@@ -93,6 +93,7 @@ const store = createStore({
                 console.log(response.data); // TODO
                 // 객체형태의 데이터를 json형태로 변환하여(stringify 메소드) localStorage에 저장(setItem)
                 //  >> localStorage는 보통 문자로 저장되므로 객체로 받은 데이터를 저장할 수가 없음
+                // localStorage.setItem 와 context.commit으로 두번 저장하는 이유 : 새로고침을 할 시 데이터를 없어지기 때문에
                 localStorage.setItem('userInfo', JSON.stringify(response.data.data));
                 
                 // 뮤테이션스 호출 (context.commit)
@@ -244,6 +245,25 @@ const store = createStore({
             .catch(error => {
                 console.log(error.response); // TODO
                 alert('게시글 획득에 실패했습니다. ( ' + error.response.data.code + ' )')
+            });
+        },
+
+        
+        /**
+         * 유저 아이디를 입력했을때 해당 게시글 획득
+         * 
+         * @param {*} context
+         */
+        likeBtn(context, boardID) {
+            const url = '/api/board/like/' + boardID;
+
+            axios.post(url)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error.response); // TODO
+                alert('좋아요 클릭에 실패했습니다. ( ' + error.response.data.code + ' )')
             });
         },
 
