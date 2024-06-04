@@ -4,7 +4,7 @@
       <div class="user-info-content">
         <h2> {{ $store.state.userInfo.name }}</h2>
         <h3>작성글 수 : {{ $store.state.userInfo.boards_count }}
-          <button @click="$store.dispatch('accountIndex', $store.state.userInfo.account)" class="btn btn-bg-white">내 게시글 보기</button>
+          <button @click="$store.dispatch('accountIndex', $store.state.userInfo.account)" class="btn btn-bg-white">내글 보기</button>
           <button @click="$store.dispatch('getBoardData')" class="btn btn-bg-white">전체 보기</button>
         </h3>
       </div>

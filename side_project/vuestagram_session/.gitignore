@@ -1,6 +1,11 @@
 /node_modules
 /public/hot
 /public/storage
+# 사진 관련 파일  깃 업로드 X
+/public/img
+/public/profile
+
+
 /storage/*.key
 /vendor
 .env

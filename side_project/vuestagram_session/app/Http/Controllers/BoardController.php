@@ -52,6 +52,8 @@ class BoardController extends Controller
         return response()->json($responseData, 200);
     }
     
+
+    // ** 좋아요 처리  ** 
     public function likeBtn($board_id) {
 
         DB::beginTransaction();
