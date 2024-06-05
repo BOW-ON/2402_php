@@ -21498,7 +21498,7 @@ function render(_ctx, _cache) {
       return _ctx.$store.dispatch('accountIndex', _ctx.$store.state.userInfo.account);
     }),
     "class": "btn btn-bg-white"
-  }, "내 게시글 보기"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "내글 보기"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.$store.dispatch('getBoardData');
     }),
@@ -21880,7 +21880,7 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
       });
     },
     /**
-     * 유저 아이디를 입력했을때 해당 게시글 획득
+     * 좋아요 버튼
      * 
      * @param {*} context
      */

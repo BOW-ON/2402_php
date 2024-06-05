@@ -250,7 +250,7 @@ const store = createStore({
 
         
         /**
-         * 유저 아이디를 입력했을때 해당 게시글 획득
+         * 좋아요 버튼
          * 
          * @param {*} context
          */
