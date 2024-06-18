@@ -139,7 +139,7 @@ class BoardController extends Controller
             throw new MyValidateException('E01');
         }
         
-        // // ** 엘러펀트로 처리 **
+        // // ** Eloquent로 처리 **
         // // 이미지 파일 저장
         // $path = $request->file('img')->store('img');
         // // 인서트 처리
